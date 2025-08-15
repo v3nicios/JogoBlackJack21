@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack 21</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Blackjack 21</h1>
+
+    <div id="area-jogo">
+        <div id="area-dealer">
+            <h2>Dealer: <span id="pontuacao-dealer"></span></h2>
+            <div id="cartas-dealer" class="area-cartas">
+                </div>
+        </div>
+
+        <div id="area-jogador">
+            <h2>Você: <span id="pontuacao-jogador"></span></h2>
+            <div id="cartas-jogador" class="area-cartas">
+                </div>
+        </div>
+
+        <div id="acoes">
+            <button id="btn-pedir">Pedir (Hit)</button>
+            <button id="btn-parar">Parar (Stand)</button>
+        </div>
+        
+        <p id="mensagem-resultado"></p>
+
+        <button id="btn-novo-jogo">Novo Jogo</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

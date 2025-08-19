@@ -83,6 +83,7 @@ function renderizarJogo() {
 
     calcularPontuacoes();
     pontuacaoJogadorEl.textContent = pontuacaoJogador;
+    
     pontuacaoDealerEl.textContent = ''; 
 }
 

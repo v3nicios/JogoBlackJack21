@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #0a5c28; 
+    background-image: url('images/feltro.webp');
+    background-size: 100vh;
     color: white;
     text-align: center;
 }
@@ -9,9 +11,11 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #1a743a;
+    background-color: #0a5c28;
+    
     border-radius: 10px;
 }
+
 
 .area-cartas {
     min-height: 150px;
@@ -20,8 +24,12 @@ body {
     align-items: center;
     gap: 10px;
     margin: 20px 0;
-}
 
+}
+.area-cartas img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+}
 .area-cartas img {
     width: 100px;
     height: auto;
@@ -36,6 +44,11 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 #btn-pedir { background-color: #4CAF50; color: white; }

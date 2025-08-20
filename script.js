@@ -22,6 +22,7 @@ btnNovoJogo.addEventListener('click', iniciarJogo);
 btnPedir.addEventListener('click', pedirCarta);
 btnParar.addEventListener('click', turnoDealer);
 
+
 function criarBaralho() {
     const naipes = ['C', 'O', 'P', 'E'];
     const valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -34,6 +35,7 @@ function criarBaralho() {
     }
 }
 
+
 function embaralharBaralho() {
     for (let i = baralho.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -44,12 +46,14 @@ function iniciarJogo() {
     jogoEmAndamento = true;
     criarBaralho();
     embaralharBaralho();
+    btnPedir.hidden = false;
+    btnParar.hidden = false;
 
 
     maoJogador = [pegarCarta(), pegarCarta()];
     maoDealer = [pegarCarta(), pegarCarta()];
 
-    
+
     mensagemResultadoEl.textContent = '';
     btnPedir.disabled = false;
     btnParar.disabled = false;
@@ -72,19 +76,19 @@ function renderizarJogo() {
         cartasJogadorEl.appendChild(imgCarta);
     });
 
-    
+
     const primeiraCartaDealer = document.createElement('img');
     primeiraCartaDealer.src = `images/${maoDealer[0].naipe}${maoDealer[0].valor}.webp`;
     cartasDealerEl.appendChild(primeiraCartaDealer);
-    
+
     const cartaVirada = document.createElement('img');
-    cartaVirada.src = 'images/verso.webp'; 
+    cartaVirada.src = 'images/verso.webp';
     cartasDealerEl.appendChild(cartaVirada);
 
 
     calcularPontuacoes();
     pontuacaoJogadorEl.textContent = pontuacaoJogador;
-    pontuacaoDealerEl.textContent = ''; 
+    pontuacaoDealerEl.textContent = '';
 }
 
 function calcularPontuacao(mao) {
@@ -100,11 +104,11 @@ function calcularPontuacao(mao) {
             pontuacao += parseInt(carta.valor);
         }
     }
-    
+
     while (pontuacao > 21 && ases > 0) {
         pontuacao -= 10;
         ases--;
-    } 
+    }
     return pontuacao;
 }
 
@@ -115,9 +119,9 @@ function calcularPontuacoes() {
 
 function pedirCarta() {
     if (!jogoEmAndamento) return;
-    
+
     maoJogador.push(pegarCarta());
-    renderizarAposPedir(); 
+    renderizarAposPedir();
 
     if (pontuacaoJogador > 21) {
         finalizarJogo('Você estourou! Dealer vence.');
@@ -130,14 +134,14 @@ function renderizarAposPedir() {
     const imgCarta = document.createElement('img');
     imgCarta.src = `images/${novaCarta.naipe}${novaCarta.valor}.webp`;
     cartasJogadorEl.appendChild(imgCarta);
-    
+
 
     pontuacaoJogador = calcularPontuacao(maoJogador);
     pontuacaoJogadorEl.textContent = pontuacaoJogador;
 }
 function turnoDealer() {
     if (!jogoEmAndamento) return;
-    
+
 
     cartasDealerEl.innerHTML = '';
     maoDealer.forEach(carta => {
@@ -146,14 +150,14 @@ function turnoDealer() {
         cartasDealerEl.appendChild(imgCarta);
     });
     pontuacaoDealerEl.textContent = pontuacaoDealer;
-    
-    
+
+
     while (pontuacaoDealer < 17) {
         maoDealer.push(pegarCarta());
         pontuacaoDealer = calcularPontuacao(maoDealer);
     }
-    
-    
+
+
     cartasDealerEl.innerHTML = '';
     maoDealer.forEach(carta => {
         const imgCarta = document.createElement('img');
@@ -168,6 +172,7 @@ function turnoDealer() {
 function determinarVencedor() {
     if (pontuacaoDealer > 21) {
         finalizarJogo('Dealer estourou! Você venceu!');
+
     } else if (pontuacaoJogador > pontuacaoDealer) {
         finalizarJogo('Você venceu!');
     } else if (pontuacaoDealer > pontuacaoJogador) {
@@ -180,9 +185,11 @@ function determinarVencedor() {
 function finalizarJogo(mensagem) {
     jogoEmAndamento = false;
     mensagemResultadoEl.textContent = mensagem;
-    btnPedir.disabled = true;
-    btnParar.disabled = true;
+    btnPedir.hidden = true;
+    btnParar.hidden = true;
 }
 
+if (!jogoEmAndamento) {
+    iniciarJogo();
+}
 
-iniciarJogo();

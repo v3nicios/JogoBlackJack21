@@ -4,6 +4,7 @@ let maoJogador = [];
 let maoDealer = [];
 let pontuacaoJogador = 0;
 let pontuacaoDealer = 0;
+
 let jogoEmAndamento = false;
 
 
@@ -67,23 +68,22 @@ function renderizarJogo() {
 
     maoJogador.forEach(carta => {
         const imgCarta = document.createElement('img');
-        imgCarta.src = `images/${carta.naipe}${carta.valor}.png`;
+        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
         cartasJogadorEl.appendChild(imgCarta);
     });
 
     
     const primeiraCartaDealer = document.createElement('img');
-    primeiraCartaDealer.src = `images/${maoDealer[0].naipe}${maoDealer[0].valor}.png`;
+    primeiraCartaDealer.src = `images/${maoDealer[0].naipe}${maoDealer[0].valor}.webp`;
     cartasDealerEl.appendChild(primeiraCartaDealer);
     
     const cartaVirada = document.createElement('img');
-    cartaVirada.src = 'images/verso.png'; 
+    cartaVirada.src = 'images/verso.webp'; 
     cartasDealerEl.appendChild(cartaVirada);
 
 
     calcularPontuacoes();
     pontuacaoJogadorEl.textContent = pontuacaoJogador;
-    
     pontuacaoDealerEl.textContent = ''; 
 }
 
@@ -128,7 +128,7 @@ function renderizarAposPedir() {
 
     const novaCarta = maoJogador[maoJogador.length - 1];
     const imgCarta = document.createElement('img');
-    imgCarta.src = `images/${novaCarta.naipe}${novaCarta.valor}.png`;
+    imgCarta.src = `images/${novaCarta.naipe}${novaCarta.valor}.webp`;
     cartasJogadorEl.appendChild(imgCarta);
     
 
@@ -142,7 +142,7 @@ function turnoDealer() {
     cartasDealerEl.innerHTML = '';
     maoDealer.forEach(carta => {
         const imgCarta = document.createElement('img');
-        imgCarta.src = `images/${carta.naipe}${carta.valor}.png`;
+        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
         cartasDealerEl.appendChild(imgCarta);
     });
     pontuacaoDealerEl.textContent = pontuacaoDealer;
@@ -157,7 +157,7 @@ function turnoDealer() {
     cartasDealerEl.innerHTML = '';
     maoDealer.forEach(carta => {
         const imgCarta = document.createElement('img');
-        imgCarta.src = `images/${carta.naipe}${carta.valor}.png`;
+        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
         cartasDealerEl.appendChild(imgCarta);
     });
     pontuacaoDealerEl.textContent = pontuacaoDealer;

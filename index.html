@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blackjack 21</title>
+    <title>BLACKJACK 21</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=New+Rocker&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-    <h1>Blackjack 21</h1>
+    <h1>BLACKJACK 21</h1>
 
     <div id="area-jogo">
         <div id="area-dealer">
             <h2>Dealer/Casa: <span id="pontuacao-dealer"></span></h2>
             <div id="cartas-dealer" class="area-cartas">
-                </div>
+            </div>
         </div>
 
         <div id="area-jogador">
             <h2>Você: <span id="pontuacao-jogador"></span></h2>
             <div id="cartas-jogador" class="area-cartas">
-                </div>
+            </div>
+        </div>
+        <div id="fichas">
+            <button id="f05" class="fichinha">05</button>
+            <button id="f10" class="fichinha">10</button>
+            <button id="f20" class="fichinha">20</button>
+            <button id="f50" class="fichinha">50</button>
+            <button id="f100" class="fichinha">100</button>
         </div>
 
         <div id="acoes">
-            <button id="btn-pedir">Pedir </button>
-            <button id="btn-parar">Parar </button>
+            <button id="btn-pedir">PEDIR </button>
+            <button id="btn-parar">PARAR </button>
         </div>
-        
         <p id="mensagem-resultado"></p>
-
-      
-
-        <button id="btn-novo-jogo">Novo Jogo</button>
+        <button id="btn-novo-jogo">JOGAR NOVAMENTE</button>
 
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

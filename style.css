@@ -153,3 +153,7 @@ button:hover {
     font-weight: bold;
     min-height: 30px;
 }
+
+.saldo{
+    font-size: 0.5em;
+}

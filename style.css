@@ -1,10 +1,14 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #0a5c28; 
+    font-family: "New Rocker", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #0a5c28;
     background-image: url('images/feltro.webp');
     background-size: 100vh;
     color: white;
     text-align: center;
+
+
 }
 
 #area-jogo {
@@ -12,7 +16,7 @@ body {
     margin: 20px auto;
     padding: 20px;
     background-color: #0a5c28;
-    
+
     border-radius: 10px;
 }
 
@@ -25,15 +29,18 @@ body {
     gap: 10px;
     margin: 20px 0;
 
+
 }
+
 .area-cartas img:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
 }
+
 .area-cartas img {
     width: 100px;
     height: auto;
-    border: 2px solid #454F5B ;
+    border: 2px solid #454F5B;
     border-radius: 5px;
 }
 
@@ -44,16 +51,79 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
+    font-family: "New Rocker", system-ui;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.fichinha {
+    width: 51px;  
+    height: 50px; 
+    border-radius: 50%; 
+    background-image: url("images/ficha2.png"); 
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 16px; 
+    font-family: "New Rocker", system-ui;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none; 
+    cursor: pointer;
+    transition: transform 0.2s ease; 
+    background-color: transparent;
+}
+
+.ficha {
+    width: 40px;
+    height: 40px;
+    background-image: url("images/ficha.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f44336;
+
+}
+
+#fichas {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+
+
 }
 
 button:hover {
     opacity: 0.9;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.fichinha:hover {
+    transform: scale(1.1); /* Aumenta um pouco a ficha */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-#btn-pedir { background-color: #4CAF50; color: white; }
-#btn-parar { background-color: #f44336; color: white; }
-#btn-novo-jogo { background-color: #008CBA; color: white; }
+#btn-pedir {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#btn-parar {
+    background-color: #f44336;
+    color: white;
+}
+
+#btn-novo-jogo {
+    background-color: #008CBA;
+    color: white;
+}
 
 #mensagem-resultado {
     font-size: 1.5em;

@@ -90,6 +90,29 @@ button {
     background-color: #f44336;
 
 }
+.area-bet {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    border: 2px solid #ffd700;
+    border-radius: 5px;
+    width: 150px;
+    height: 100px;
+    background-image: url("images/areabet.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+}
+.area-ficha{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
 
 #fichas {
     display: flex; 

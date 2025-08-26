@@ -158,7 +158,7 @@ button:hover {
     font-size: 0.5em;
 }
 
-@media (max-width: 425px){
+@media (max-width: 768px){
     
 .area-cartas {
     min-height: 150px;

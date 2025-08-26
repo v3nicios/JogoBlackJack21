@@ -124,7 +124,9 @@ function finalizarJogo(mensagem, resultado) {
 function turnoDealer() {
 
     jogoEmAndamento = false;
-
+    btnPedir.hidden = true;
+    btnParar.hidden = true;
+    mensagemResultadoEl.textContent = "Turno encerrado vez do Dealer";
 
     renderizarMaoDealer();
 

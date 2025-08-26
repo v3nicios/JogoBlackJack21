@@ -161,7 +161,7 @@ function puxarCartaDealer() {
         renderizarMaoDealer();
 
 
-        setTimeout(puxarCartaDealer, 4000);
+        setTimeout(puxarCartaDealer, 2500);
     } else {
 
         mensagemResultadoEl.textContent = "";

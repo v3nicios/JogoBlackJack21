@@ -30,11 +30,11 @@ btnApostar.addEventListener('click', iniciarJogo);
 btnNovoJogo.addEventListener('click', prepararNovaRodada);
 btnPedir.addEventListener('click', pedirCarta);
 btnParar.addEventListener('click', turnoDealer);
-btnFicha05.addEventListener('click', function () { adicionarAposta(5)});
-btnFicha10.addEventListener('click', function () { adicionarAposta(10)});
-btnFicha20.addEventListener('click', function () { adicionarAposta(20)});
-btnFicha50.addEventListener('click', function () { adicionarAposta(50)});
-btnFicha100.addEventListener('click', function () { adicionarAposta(100)});
+btnFicha05.addEventListener('click', function () { adicionarAposta(5) });
+btnFicha10.addEventListener('click', function () { adicionarAposta(10) });
+btnFicha20.addEventListener('click', function () { adicionarAposta(20) });
+btnFicha50.addEventListener('click', function () { adicionarAposta(50) });
+btnFicha100.addEventListener('click', function () { adicionarAposta(100) });
 
 function prepararNovaRodada() {
     apostaAtual = 0;
@@ -120,11 +120,23 @@ function finalizarJogo(mensagem, resultado) {
     btnNovoJogo.hidden = false;
 }
 
+
 function turnoDealer() {
-    if (!jogoEmAndamento && maoJogador.length < 2) return;
-    
+
     jogoEmAndamento = false;
 
+
+    renderizarMaoDealer();
+
+    if (maoJogador < maoDealer){
+        determinarVencedor
+    }
+    else {
+    setTimeout(puxarCartaDealer, 1500);
+    }
+}
+
+function renderizarMaoDealer() {
     cartasDealerEl.innerHTML = '';
     maoDealer.forEach(carta => {
         const imgCarta = document.createElement('img');
@@ -133,21 +145,26 @@ function turnoDealer() {
     });
     pontuacaoDealer = calcularPontuacao(maoDealer);
     pontuacaoDealerEl.textContent = pontuacaoDealer;
+}
 
-    while (pontuacaoDealer < 17) {
+function puxarCartaDealer() {
+
+    if (pontuacaoDealer <= 17) {
+        mensagemResultadoEl.textContent = "Dealer está jogando...";
+
+
         maoDealer.push(pegarCarta());
-        pontuacaoDealer = calcularPontuacao(maoDealer);
-    }
-    
-    cartasDealerEl.innerHTML = '';
-    maoDealer.forEach(carta => {
-        const imgCarta = document.createElement('img');
-        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
-        cartasDealerEl.appendChild(imgCarta);
-    });
-    pontuacaoDealerEl.textContent = pontuacaoDealer;
 
-    determinarVencedor();
+
+        renderizarMaoDealer();
+
+
+        setTimeout(puxarCartaDealer, 2000);
+    } else {
+
+        mensagemResultadoEl.textContent = "";
+        determinarVencedor();
+    }
 }
 
 function determinarVencedor() {

@@ -157,3 +157,84 @@ button:hover {
 .saldo{
     font-size: 0.5em;
 }
+
+@media (max-width: 425px){
+    
+.area-cartas {
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.area-cartas img {
+    width: 70px;
+    height: auto;
+    border: 2px solid #454F5B;
+    border-radius: 5px;
+}
+h2, h1 {
+font-size: 1.0rem;
+
+}
+.area-bet {
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    border: 2px solid #ffd700;
+    border-radius: 5px;
+    width: 79px;
+    height: 62px;
+    background-image: url(images/areabet.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.fichinha {
+    width: 36px;
+    height: 39px;
+    border-radius: 52%;
+    background-image: url(images/ficha2.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 12px;
+    font-family: "New Rocker", system-ui;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background-color: transparent;
+}
+#mensagem-resultado {
+    font-size: 0.9em;
+    font-weight: bold;
+    min-height: 30px;
+}
+button {
+    padding: 10px 20px;
+    font-size: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    font-family: "New Rocker", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+#fichas {
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 12px 0;
+}
+}

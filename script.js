@@ -7,6 +7,8 @@ let betsaldo = 1000;
 let apostaAtual = 0;
 let jogadorTemBlackjack = false;
 let jogoEmAndamento = false;
+let animationFrameId; 
+let intervalId;
 
 const pontuacaoJogadorEl = document.getElementById('pontuacao-jogador');
 const pontuacaoDealerEl = document.getElementById('pontuacao-dealer');
@@ -27,7 +29,7 @@ const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 
 btnApostar.addEventListener('click', iniciarJogo);
-btnNovoJogo.addEventListener('click', prepararNovaRodada);
+btnNovoJogo.addEventListener('click', prepararNovaRodada, );
 btnPedir.addEventListener('click', pedirCarta);
 btnParar.addEventListener('click', turnoDealer);
 btnFicha05.addEventListener('click', function () { adicionarAposta(5) });
@@ -40,6 +42,7 @@ function prepararNovaRodada() {
     apostaAtual = 0;
     jogadorTemBlackjack = false;
     jogoEmAndamento = false;
+    pararAnimacao(); 
 
     cartasJogadorEl.innerHTML = '';
     cartasDealerEl.innerHTML = '';
@@ -53,6 +56,8 @@ function prepararNovaRodada() {
     btnPedir.hidden = true;
     btnParar.hidden = true;
     btnNovoJogo.hidden = true;
+    document.getElementById('area-dealer').hidden = true;
+    document.getElementById('area-jogador').hidden = true;
 }
 
 function adicionarAposta(valor) {
@@ -75,6 +80,8 @@ function iniciarJogo() {
     jogoEmAndamento = true;
 
     document.getElementById('fichas').style.display = "none";
+    document.getElementById('area-dealer').hidden = false;
+    document.getElementById('area-jogador').hidden = false;
     btnApostar.hidden = true;
     btnPedir.hidden = false;
     btnParar.hidden = false;
@@ -90,6 +97,7 @@ function iniciarJogo() {
 
     if (pontuacaoJogador === 21) {
         jogadorTemBlackjack = true;
+       
         mensagemResultadoEl.textContent = "Blackjack!";
         btnPedir.disabled = true;
         btnParar.disabled = true;
@@ -130,11 +138,11 @@ function turnoDealer() {
 
     renderizarMaoDealer();
 
-    if (maoJogador < maoDealer){
+    if (maoJogador < maoDealer) {
         determinarVencedor
     }
     else {
-    setTimeout(puxarCartaDealer, 1500);
+        setTimeout(puxarCartaDealer, 1500);
     }
 }
 
@@ -166,16 +174,22 @@ function puxarCartaDealer() {
 
         mensagemResultadoEl.textContent = "";
         determinarVencedor();
+
     }
 }
 
 function determinarVencedor() {
     if (pontuacaoJogador > 21) {
+
         finalizarJogo('Você estourou! Dealer vence.', 'derrota');
+        iniciarAnimacaoDerrota();
     } else if (pontuacaoDealer > 21 || pontuacaoJogador > pontuacaoDealer) {
         finalizarJogo('Você venceu!', 'vitoria');
+        vitoriajogador();
+        vitoriafirework();
     } else if (pontuacaoDealer > pontuacaoJogador) {
         finalizarJogo('Dealer venceu!', 'derrota');
+        iniciarAnimacaoDerrota();
     } else {
         finalizarJogo('Empate (Push)!', 'empate');
     }
@@ -188,8 +202,10 @@ function pedirCarta() {
     renderizarAposPedir();
 
     if (pontuacaoJogador > 21) {
+        iniciarAnimacaoDerrota();
         finalizarJogo('Você estourou! Dealer vence.', 'derrota');
     } else if (pontuacaoJogador === 21) {
+        
         turnoDealer();
     }
 }
@@ -282,6 +298,116 @@ function renderizarAposPedir() {
 
     pontuacaoJogador = calcularPontuacao(maoJogador);
     pontuacaoJogadorEl.textContent = pontuacaoJogador;
+}
+
+
+
+function iniciarAnimacaoDerrota() {
+    var duration = 2 * 1000;
+    var animationEnd = Date.now() + duration;
+    var skew = 1;
+
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    (function frame() {
+        var timeLeft = animationEnd - Date.now();
+        var ticks = Math.max(200, 500 * (timeLeft / duration));
+        skew = Math.max(0.8, skew - 0.001);
+
+        confetti({
+            particleCount: 3,
+            startVelocity: 0,
+            ticks: ticks,
+            origin: {
+                x: Math.random(),
+                y: (Math.random() * skew) - 0.2
+            },
+
+            colors: ['#FF4136', '#85144b', '#B10DC9'],
+            shapes: ['circle'],
+            gravity: randomInRange(0.4, 0.6),
+            scalar: randomInRange(0.4, 1),
+            drift: randomInRange(-0.4, 0.4)
+        });
+
+        if (timeLeft > 0) {
+          animationFrameId =  requestAnimationFrame(frame);
+        }
+    }());
+}
+
+function vitoriajogador() {
+    var end = Date.now() + (4 * 1000);
+
+
+    var colors = ['#bbae00ff', 
+        '#a31704ff', 
+        '#ffffff',
+        '#4400ffff',
+        '#039203ff'
+    ];
+
+    (function frame() {
+        confetti({
+            particleCount: 2,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: colors
+        });
+        confetti({
+            particleCount: 2,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: colors
+        });
+
+        if (Date.now() < end) {
+            animationFrameId = requestAnimationFrame(frame);
+        }
+    }());
+}
+
+function vitoriafirework() {
+    var duration = 50 * 1000; 
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    
+    intervalId = setInterval(function() {
+        var timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(intervalId);
+        }
+
+        var particleCount = 50 * (timeLeft / duration);
+        
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+    }, 250);
+    
+    
+}
+function pararAnimacao() {
+  
+  if (animationFrameId) {
+    
+    cancelAnimationFrame(animationFrameId);
+    
+    animationFrameId = null;
+  }
+   if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
 }
 
 atualizarSaldoNaTela();

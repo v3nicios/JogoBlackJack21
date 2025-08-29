@@ -339,14 +339,16 @@ function iniciarAnimacaoDerrota() {
 }
 
 function vitoriajogador() {
-    var end = Date.now() + (4 * 1000);
+    var end = Date.now() + (40 * 1000);
 
 
-    var colors = ['#bbae00ff', 
+    var colors = [ '#D3AF37',
         '#a31704ff', 
-        '#ffffff',
-        '#4400ffff',
+       
+        '#ffffffff',
         '#039203ff'
+        
+      
     ];
 
     (function frame() {
@@ -379,7 +381,12 @@ function vitoriafirework() {
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
     }
-
+    var coresDaVitoria = ['#D3AF37',
+        '#a31704ff', 
+        
+        '#ffffffff',
+        '#039203ff'
+        ];
     
     intervalId = setInterval(function() {
         var timeLeft = animationEnd - Date.now();
@@ -390,8 +397,12 @@ function vitoriafirework() {
 
         var particleCount = 50 * (timeLeft / duration);
         
-        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
-        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+        confetti({ ...defaults, particleCount,
+            colors: coresDaVitoria,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+        confetti({ ...defaults, particleCount,
+            colors: coresDaVitoria,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
     }, 250);
     
     

@@ -58,22 +58,22 @@ button {
 }
 
 .fichinha {
-    width: 51px;  
-    height: 50px; 
-    border-radius: 50%; 
-    background-image: url("images/ficha2.png"); 
-    background-size: contain; 
+    width: 51px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: url("images/ficha2.png");
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
-    font-size: 16px; 
+    font-size: 16px;
     font-family: "New Rocker", system-ui;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none; 
+    border: none;
     cursor: pointer;
-    transition: transform 0.2s ease; 
+    transition: transform 0.2s ease;
     background-color: transparent;
 }
 
@@ -90,9 +90,10 @@ button {
     background-color: #f44336;
 
 }
+
 .area-bet {
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 15px;
     margin: 20px 0;
@@ -106,17 +107,18 @@ button {
 
 
 }
-.area-ficha{
-    display: flex; 
-    justify-content: center; 
+
+.area-ficha {
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 15px;
     margin: 20px 0;
 }
 
 #fichas {
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 15px;
     margin: 20px 0;
@@ -128,8 +130,10 @@ button:hover {
     opacity: 0.9;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
 .fichinha:hover {
-    transform: scale(1.1); /* Aumenta um pouco a ficha */
+    transform: scale(1.1);
+    /* Aumenta um pouco a ficha */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -148,255 +152,303 @@ button:hover {
     color: white;
 }
 
+#bet {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(91, 228, 155, 0.7);
+
+    animation: pulsar 2s infinite;
+}
+
+
+
+@keyframes pulsar {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(91, 228, 155, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(220, 53, 69, 0);
+
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+    }
+}
+
 #mensagem-resultado {
     font-size: 1.5em;
     font-weight: bold;
     min-height: 30px;
 }
 
-.saldo{
+.saldo {
     font-size: 0.5em;
 }
 
-@media (max-width: 768px){
-    
-.area-cartas {
-    min-height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-.area-cartas img {
-    width: 70px;
-    height: auto;
-    border: 2px solid #454F5B;
-    border-radius: 5px;
-}
-h2, h1 {
-font-size: 1.0rem;
+@media (max-width: 768px) {
 
-}
-.area-bet {
-    display: flex
-;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin: 20px 0;
-    border: 2px solid #ffd700;
-    border-radius: 5px;
-    width: 79px;
-    height: 62px;
-    background-image: url(images/areabet.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.fichinha {
-    width: 36px;
-    height: 39px;
-    border-radius: 52%;
-    background-image: url(images/ficha2.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    font-size: 12px;
-    font-family: "New Rocker", system-ui;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: transparent;
-}
-#mensagem-resultado {
-    font-size: 0.9em;
-    font-weight: bold;
-    min-height: 30px;
-}
-button {
-    padding: 10px 20px;
-    font-size: 10px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 15px;
-    font-family: "New Rocker", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-#fichas {
-    display: flex
-;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    margin: 12px 0;
-}
-}
+    .area-cartas {
+        min-height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
 
-@media (max-width: 480px){
-    
-.area-cartas {
-    min-height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-.area-cartas img {
-    width: 70px;
-    height: auto;
-    border: 2px solid #454F5B;
-    border-radius: 5px;
-}
-h2, h1 {
-font-size: 1.0rem;
+    .area-cartas img {
+        width: 70px;
+        height: auto;
+        border: 2px solid #454F5B;
+        border-radius: 5px;
+    }
 
-}
-.area-bet {
-    display: flex
-;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin: 20px 0;
-    border: 2px solid #ffd700;
-    border-radius: 5px;
-    width: 79px;
-    height: 62px;
-    background-image: url(images/areabet.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.fichinha {
-    width: 36px;
-    height: 39px;
-    border-radius: 52%;
-    background-image: url(images/ficha2.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    font-size: 12px;
-    font-family: "New Rocker", system-ui;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: transparent;
-}
-#mensagem-resultado {
-    font-size: 0.9em;
-    font-weight: bold;
-    min-height: 30px;
-}
-button {
-    padding: 10px 20px;
-    font-size: 10px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 15px;
-    font-family: "New Rocker", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-#fichas {
-    display: flex
-;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    margin: 12px 0;
-}
+    h2,
+    h1 {
+        font-size: 1.0rem;
+
+    }
+
+    .area-bet {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+        border: 2px solid #ffd700;
+        border-radius: 5px;
+        width: 79px;
+        height: 62px;
+        background-image: url(images/areabet.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .fichinha {
+        width: 36px;
+        height: 39px;
+        border-radius: 52%;
+        background-image: url(images/ficha2.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        font-size: 12px;
+        font-family: "New Rocker", system-ui;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        background-color: transparent;
+    }
+
+    #mensagem-resultado {
+        font-size: 0.9em;
+        font-weight: bold;
+        min-height: 30px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 10px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 15px;
+        font-family: "New Rocker", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #fichas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin: 12px 0;
+    }
 }
 
-@media (max-width: 425px){
-    
-.area-cartas {
-    min-height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-.area-cartas img {
-    width: 70px;
-    height: auto;
-    border: 2px solid #454F5B;
-    border-radius: 5px;
-}
-h2, h1 {
-font-size: 1.0rem;
+@media (max-width: 480px) {
 
+    .area-cartas {
+        min-height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .area-cartas img {
+        width: 70px;
+        height: auto;
+        border: 2px solid #454F5B;
+        border-radius: 5px;
+    }
+
+    h2,
+    h1 {
+        font-size: 1.0rem;
+
+    }
+
+    .area-bet {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+        border: 2px solid #ffd700;
+        border-radius: 5px;
+        width: 79px;
+        height: 62px;
+        background-image: url(images/areabet.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .fichinha {
+        width: 36px;
+        height: 39px;
+        border-radius: 52%;
+        background-image: url(images/ficha2.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        font-size: 12px;
+        font-family: "New Rocker", system-ui;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        background-color: transparent;
+    }
+
+    #mensagem-resultado {
+        font-size: 0.9em;
+        font-weight: bold;
+        min-height: 30px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 10px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 15px;
+        font-family: "New Rocker", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #fichas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin: 12px 0;
+    }
 }
-.area-bet {
-    display: flex
-;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin: 20px 0;
-    border: 2px solid #ffd700;
-    border-radius: 5px;
-    width: 79px;
-    height: 62px;
-    background-image: url(images/areabet.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.fichinha {
-    width: 36px;
-    height: 39px;
-    border-radius: 52%;
-    background-image: url(images/ficha2.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    font-size: 12px;
-    font-family: "New Rocker", system-ui;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: transparent;
-}
-#mensagem-resultado {
-    font-size: 0.9em;
-    font-weight: bold;
-    min-height: 30px;
-}
-button {
-    padding: 10px 20px;
-    font-size: 10px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 15px;
-    font-family: "New Rocker", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-#fichas {
-    display: flex
-;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    margin: 12px 0;
-}
+
+@media (max-width: 425px) {
+
+    .area-cartas {
+        min-height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .area-cartas img {
+        width: 70px;
+        height: auto;
+        border: 2px solid #454F5B;
+        border-radius: 5px;
+    }
+
+    h2,
+    h1 {
+        font-size: 1.0rem;
+
+    }
+
+    .area-bet {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin: 20px 0;
+        border: 2px solid #ffd700;
+        border-radius: 5px;
+        width: 79px;
+        height: 62px;
+        background-image: url(images/areabet.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .fichinha {
+        width: 36px;
+        height: 39px;
+        border-radius: 52%;
+        background-image: url(images/ficha2.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        font-size: 12px;
+        font-family: "New Rocker", system-ui;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        background-color: transparent;
+    }
+
+    #mensagem-resultado {
+        font-size: 0.9em;
+        font-weight: bold;
+        min-height: 30px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 10px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 15px;
+        font-family: "New Rocker", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #fichas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin: 12px 0;
+    }
 }

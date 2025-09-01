@@ -16,7 +16,6 @@ body {
     margin: 20px auto;
     padding: 20px;
     background-color: #0a5c28;
-
     border-radius: 10px;
 }
 
@@ -133,22 +132,21 @@ button:hover {
 
 .fichinha:hover {
     transform: scale(1.1);
-    /* Aumenta um pouco a ficha */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #btn-pedir {
-    background-color: #4CAF50;
+    background-color: #379643;
     color: white;
 }
 
 #btn-parar {
-    background-color: #f44336;
+    background-color: #DB2C2F;
     color: white;
 }
 
 #btn-novo-jogo {
-    background-color: #008CBA;
+    background-color: #1357D8;
     color: white;
 }
 
@@ -159,6 +157,15 @@ button:hover {
     cursor: pointer;
     box-shadow: 0 0 0 0 rgba(91, 228, 155, 0.7);
 
+    animation: pulsar 2s infinite;
+}
+
+#dubliar{
+    background-color: #D4B500;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(0, 184, 217, 0.7);
     animation: pulsar 2s infinite;
 }
 

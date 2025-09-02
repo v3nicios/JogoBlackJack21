@@ -11,14 +11,22 @@ let animationFrameId;
 let intervalId;
 let valorGanho = 0;
 
-const pontuacaoJogadorEl = document.getElementById('pontuacao-jogador');
+
+let maoJogador2 = [];
+let pontuacaoJogador2 = 0;
+let aposta2 = 0;
+let emModoSplit = false;
+let maoAtivaIndex = 1;
+
+
 const pontuacaoDealerEl = document.getElementById('pontuacao-dealer');
-const cartasJogadorEl = document.getElementById('cartas-jogador');
 const cartasDealerEl = document.getElementById('cartas-dealer');
 const mensagemResultadoEl = document.getElementById('mensagem-resultado');
 const saldobet = document.getElementById('saldojogador');
 const apostaAtualEl = document.getElementById('bet-jogador');
 
+
+const btnDividir = document.getElementById('btn-dividir');
 const btnPedir = document.getElementById('btn-pedir');
 const btnParar = document.getElementById('btn-parar');
 const btnNovoJogo = document.getElementById('btn-novo-jogo');
@@ -29,12 +37,16 @@ const btnFicha10 = document.getElementById('f10');
 const btnFicha20 = document.getElementById('f20');
 const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
+const btnretibet = document.getElementById('beti');
 
+
+btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
 btnNovoJogo.addEventListener('click', prepararNovaRodada,);
 btnPedir.addEventListener('click', pedirCarta);
-btnParar.addEventListener('click', turnoDealer);
+btnParar.addEventListener('click', pararMaoAtual);
 btnduplicar.addEventListener('click', duplicarAposta);
+btnretibet.addEventListener('click', zeraaposta)
 btnFicha05.addEventListener('click', function () { adicionarAposta(5) });
 btnFicha10.addEventListener('click', function () { adicionarAposta(10) });
 btnFicha20.addEventListener('click', function () { adicionarAposta(20) });
@@ -42,29 +54,84 @@ btnFicha50.addEventListener('click', function () { adicionarAposta(50) });
 btnFicha100.addEventListener('click', function () { adicionarAposta(100) });
 
 
+function pararMaoAtual() {
+    if (emModoSplit && maoAtivaIndex === 1) {
+        maoAtivaIndex = 2;
+        renderizarMaos();
+    } else {
+        turnoDealer();
+    }
+}
+
+function dividirMao() {
+    if (betsaldo < apostaAtual) {
+        mensagemResultadoEl.textContent = "Saldo insuficiente para dividir!";
+        return;
+    }
+
+    emModoSplit = true;
+    maoAtivaIndex = 1;
+
+    betsaldo -= apostaAtual;
+
+    apostaAtual = apostaAtual * 2;
+    atualizarSaldoNaTela();
+    atualizarApostaNaTela();
+
+
+    maoJogador2 = [maoJogador.pop()];
+    maoJogador.push(pegarCarta());
+    maoJogador2.push(pegarCarta());
+
+    btnDividir.hidden = true;
+    btnduplicar.hidden = true;
+
+    renderizarMaos();
+}
+
+function zeraaposta() {
+    if (!jogoEmAndamento) {
+        betsaldo += apostaAtual;
+        apostaAtual = 0;
+        atualizarApostaNaTela();
+        atualizarSaldoNaTela();
+    }
+}
+
 
 function prepararNovaRodada() {
+    pararAnimacao();
     apostaAtual = 0;
     jogadorTemBlackjack = false;
     jogoEmAndamento = false;
-    pararAnimacao();
 
-    cartasJogadorEl.innerHTML = '';
+
+    emModoSplit = false;
+    maoJogador = [];
+    maoJogador2 = [];
+    pontuacaoJogador2 = 0;
+    aposta2 = 0;
+    maoAtivaIndex = 1;
+
+
     cartasDealerEl.innerHTML = '';
-    pontuacaoJogadorEl.textContent = '';
     pontuacaoDealerEl.textContent = '';
+
     mensagemResultadoEl.textContent = 'Faça sua aposta...';
     apostaAtualEl.textContent = '0';
-
+    document.getElementById('mao-2-container').hidden = true;
+    document.getElementById('mao-1-container').classList.remove('mao-ativa');
     document.getElementById('fichas').style.display = 'flex';
     btnApostar.hidden = false;
     btnPedir.hidden = true;
     btnParar.hidden = true;
     btnNovoJogo.hidden = true;
     btnduplicar.hidden = true;
-    
+    btnDividir.hidden = true;
+
     document.getElementById('area-dealer').hidden = true;
     document.getElementById('area-jogador').hidden = true;
+    document.getElementById('area-jogador').style.display = 'none';
 }
 
 function adicionarAposta(valor) {
@@ -77,6 +144,7 @@ function adicionarAposta(valor) {
         mensagemResultadoEl.textContent = "Saldo insuficiente para esta ficha !";
     }
 }
+
 
 function iniciarJogo() {
     if (apostaAtual === 0) {
@@ -95,138 +163,156 @@ function iniciarJogo() {
 
     criarBaralho();
     embaralharBaralho();
-
+    document.getElementById('area-jogador').style.display = 'flex';
     maoJogador = [pegarCarta(), pegarCarta()];
     maoDealer = [pegarCarta(), pegarCarta()];
 
     mensagemResultadoEl.textContent = '';
-    renderizarJogo();
+    renderizarMaos();
 
-    if ( pontuacaoJogador === 10 || pontuacaoJogador === 11) {
+
+
+    const podeDividir = maoJogador.length === 2 && maoJogador[0].valor === maoJogador[1].valor;
+    if (podeDividir && betsaldo >= apostaAtual) {
+        btnDividir.hidden = false;
+
+    }
+
+    if (pontuacaoJogador === 10 || pontuacaoJogador === 11) {
         btnduplicar.hidden = false;
     }
+
     if (pontuacaoJogador === 21) {
         jogadorTemBlackjack = true;
-
         mensagemResultadoEl.textContent = "Blackjack!";
-        btnPedir.disabled = true;
-        btnParar.disabled = true;
         setTimeout(turnoDealer, 1500);
-    } else {
-        jogadorTemBlackjack = false;
-        btnPedir.disabled = false;
-        btnParar.disabled = false;
     }
 }
 
-function finalizarJogo(mensagem, resultado) {
-    
+function finalizarJogo() {
+    let mensagemFinal = '';
 
-    if (resultado === 'vitoria' && jogadorTemBlackjack) {
-        valorGanho = apostaAtual * 1.5;
-        betsaldo += apostaAtual * 2.5;
-        mensagem = `Blackjack! Você Venceu! +${valorGanho}`;
-    } else if (resultado === 'vitoria') {
-        
+
+    let valorGanho1 = 0;
+    if (pontuacaoJogador > 21) {
+        mensagemFinal += 'Mão 1: Você estourou!<br>';
+    } else if (pontuacaoDealer > 21 || pontuacaoJogador > pontuacaoDealer) {
+        valorGanho1 = apostaAtual;
         betsaldo += apostaAtual * 2;
-        valorGanho = apostaAtual;
-        mensagem = `Você venceu! Você ganhou: +${valorGanho}`;
-    } else if (resultado === 'empate') {
+        mensagemFinal += `Mão 1: Você venceu! +${valorGanho1}<br>`;
+    } else if (pontuacaoDealer > pontuacaoJogador) {
+        mensagemFinal += 'Mão 1: Dealer venceu!<br>';
+    } else {
         betsaldo += apostaAtual;
+        mensagemFinal += 'Mão 1: Empate!<br>';
     }
 
 
+    if (emModoSplit) {
+        let valorGanho2 = 0;
+        if (pontuacaoJogador2 > 21) {
+            mensagemFinal += 'Mão 2: Você estourou!<br>';
+        } else if (pontuacaoDealer > 21 || pontuacaoJogador2 > pontuacaoDealer) {
+            valorGanho2 = aposta2;
+            betsaldo += aposta2 * 2;
+            mensagemFinal += `Mão 2: Você venceu! +${valorGanho2}<br>`;
+        } else if (pontuacaoDealer > pontuacaoJogador2) {
+            mensagemFinal += 'Mão 2: Dealer venceu!<br>';
+        } else {
+            betsaldo += aposta2;
+            mensagemFinal += 'Mão 2: Empate!<br>';
+        }
+    }
 
+    mensagemResultadoEl.innerHTML = mensagemFinal;
     atualizarSaldoNaTela();
     jogoEmAndamento = false;
-    mensagemResultadoEl.textContent = mensagem;
-
     btnPedir.hidden = true;
     btnParar.hidden = true;
     btnNovoJogo.hidden = false;
+    btnDividir.hidden = true;
+    btnduplicar.hidden = true;
 }
 
 
 function turnoDealer() {
-
     jogoEmAndamento = false;
     btnPedir.hidden = true;
     btnParar.hidden = true;
     btnduplicar.hidden = true;
-    mensagemResultadoEl.textContent = "Turno encerrado vez do Dealer";
+    btnDividir.hidden = true;
+    mensagemResultadoEl.textContent = "Turno do Dealer...";
 
-    renderizarMaoDealer();
-
-    if (maoJogador < maoDealer) {
-        determinarVencedor
-    }
-    else {
-        setTimeout(puxarCartaDealer, 1500);
-    }
+    renderizarMaoDealer(true);
+    setTimeout(puxarCartaDealer, 1500);
 }
 
-function renderizarMaoDealer() {
+function renderizarMaoDealer(mostrarTudo) {
     cartasDealerEl.innerHTML = '';
-    maoDealer.forEach(carta => {
-        const imgCarta = document.createElement('img');
-        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
-        cartasDealerEl.appendChild(imgCarta);
-    });
-    pontuacaoDealer = calcularPontuacao(maoDealer);
-    pontuacaoDealerEl.textContent = pontuacaoDealer;
+    if (!maoDealer || maoDealer.length === 0) return;
+
+    if (mostrarTudo) {
+        pontuacaoDealer = calcularPontuacao(maoDealer);
+        pontuacaoDealerEl.textContent = pontuacaoDealer;
+        maoDealer.forEach(carta => {
+            const imgCarta = document.createElement('img');
+            imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
+            cartasDealerEl.appendChild(imgCarta);
+        });
+    } else {
+        pontuacaoDealerEl.textContent = calcularPontuacao([maoDealer[0]]);
+        const primeiraCarta = document.createElement('img');
+        primeiraCarta.src = `images/${maoDealer[0].naipe}${maoDealer[0].valor}.webp`;
+        cartasDealerEl.appendChild(primeiraCarta);
+
+        const cartaVirada = document.createElement('img');
+        cartaVirada.src = 'images/verso.webp';
+        cartasDealerEl.appendChild(cartaVirada);
+    }
 }
+
 
 function puxarCartaDealer() {
-
-    if (pontuacaoDealer <= 17) {
+    pontuacaoDealer = calcularPontuacao(maoDealer);
+    if (pontuacaoDealer < 17) {
         mensagemResultadoEl.textContent = "Dealer está jogando...";
-
-
         maoDealer.push(pegarCarta());
-
-
-        renderizarMaoDealer();
-
-
-        setTimeout(puxarCartaDealer, 2500);
+        renderizarMaoDealer(true);
+        setTimeout(puxarCartaDealer, 1500);
     } else {
-
         mensagemResultadoEl.textContent = "";
-        determinarVencedor();
-
+        finalizarJogo();
     }
 }
 
-function determinarVencedor() {
-    if (pontuacaoJogador > 21) {
 
-        finalizarJogo('Você estourou! Dealer vence.', 'derrota');
-        iniciarAnimacaoDerrota();
-    } else if (pontuacaoDealer > 21 || pontuacaoJogador > pontuacaoDealer) {
-        finalizarJogo('Você venceu!', 'vitoria');
-        vitoriajogador();
-        vitoriafirework();
-    } else if (pontuacaoDealer > pontuacaoJogador) {
-        finalizarJogo('Dealer venceu!', 'derrota');
-        iniciarAnimacaoDerrota();
-    } else {
-        finalizarJogo('Empate (Push)!', 'empate');
-    }
-}
 
 function pedirCarta() {
     if (!jogoEmAndamento) return;
     btnduplicar.hidden = true;
-   
-    maoJogador.push(pegarCarta());
-    renderizarAposPedir();
+    btnDividir.hidden = true;
 
-    if (pontuacaoJogador > 21) {
-        iniciarAnimacaoDerrota();
-        finalizarJogo('Você estourou! Dealer vence.', 'derrota');
-    } else if (pontuacaoJogador === 21) {
+    if (emModoSplit) {
+        if (maoAtivaIndex === 1) {
+            maoJogador.push(pegarCarta());
+        } else {
+            maoJogador2.push(pegarCarta());
+        }
+    } else {
+        maoJogador.push(pegarCarta());
+    }
 
-        turnoDealer();
+    renderizarMaos();
+
+    let pontuacaoAtiva;
+    if (emModoSplit) {
+        pontuacaoAtiva = (maoAtivaIndex === 1) ? pontuacaoJogador : pontuacaoJogador2;
+    } else {
+        pontuacaoAtiva = pontuacaoJogador;
+    }
+
+    if (pontuacaoAtiva > 21) {
+        pararMaoAtual();
     }
 }
 
@@ -248,10 +334,32 @@ function embaralharBaralho() {
         [baralho[i], baralho[j]] = [baralho[j], baralho[i]];
     }
 }
-
-function pegarCarta() {
+ function pegarCarta() {
     return baralho.pop();
-}
+    
+ }
+/* function pegarCarta() {
+    if (baralhoDeTeste.length > 0) {
+        return baralhoDeTeste.shift(); 
+    } else {
+        console.log("Baralho de teste acabou!");
+        return { valor: 'A', naipe: 'E' };
+    }
+} */
+
+const baralhoDeTeste = [
+    
+    { valor: '8', naipe: 'C' },  
+    { valor: '8', naipe: 'P' },  
+    
+ 
+    { valor: 'A', naipe: 'E' },  
+    { valor: '3', naipe: 'O' },  
+
+ 
+    { valor: '10', naipe: 'C' }, 
+    { valor: 'K', naipe: 'P' }   
+];
 
 function calcularPontuacao(mao) {
     let pontuacao = 0;
@@ -273,11 +381,6 @@ function calcularPontuacao(mao) {
     return pontuacao;
 }
 
-function calcularPontuacoes() {
-    pontuacaoJogador = calcularPontuacao(maoJogador);
-    pontuacaoDealer = calcularPontuacao(maoDealer);
-}
-
 function atualizarSaldoNaTela() {
     saldobet.textContent = betsaldo;
 }
@@ -286,65 +389,69 @@ function atualizarApostaNaTela() {
     apostaAtualEl.textContent = apostaAtual;
 }
 
-function renderizarJogo() {
-    cartasJogadorEl.innerHTML = '';
+function renderizarMaos() {
+    pontuacaoJogador = calcularPontuacao(maoJogador);
+    if (emModoSplit) {
+        pontuacaoJogador2 = calcularPontuacao(maoJogador2);
+    }
+
+
+    const mao1Container = document.getElementById('mao-1-container');
+    const cartas1El = document.getElementById('cartas-jogador-1');
+    cartas1El.innerHTML = '';
     maoJogador.forEach(carta => {
         const imgCarta = document.createElement('img');
         imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
-        cartasJogadorEl.appendChild(imgCarta);
+        cartas1El.appendChild(imgCarta);
     });
+    document.getElementById('pontuacao-jogador-1').textContent = pontuacaoJogador;
 
-    cartasDealerEl.innerHTML = '';
-    const primeiraCartaDealer = document.createElement('img');
-    primeiraCartaDealer.src = `images/${maoDealer[0].naipe}${maoDealer[0].valor}.webp`;
-    cartasDealerEl.appendChild(primeiraCartaDealer);
 
-    const cartaVirada = document.createElement('img');
-    cartaVirada.src = 'images/verso.webp';
-    cartasDealerEl.appendChild(cartaVirada);
 
-    calcularPontuacoes();
-    pontuacaoJogadorEl.textContent = pontuacaoJogador;
-    
-    const pontuacaoVisivelDealer = calcularPontuacao([maoDealer[0]]);
-    pontuacaoDealerEl.textContent = pontuacaoVisivelDealer;
-}
+    const mao2Container = document.getElementById('mao-2-container');
+    if (emModoSplit) {
+        mao2Container.hidden = false;
+        const cartas2El = document.getElementById('cartas-jogador-2');
+        cartas2El.innerHTML = '';
+        maoJogador2.forEach(carta => {
+            const imgCarta = document.createElement('img');
+            imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
+            cartas2El.appendChild(imgCarta);
+        });
+        document.getElementById('pontuacao-jogador-2').textContent = pontuacaoJogador2;
 
-function renderizarAposPedir() {
-    const novaCarta = maoJogador[maoJogador.length - 1];
-    const imgCarta = document.createElement('img');
-    imgCarta.src = `images/${novaCarta.naipe}${novaCarta.valor}.webp`;
-    cartasJogadorEl.appendChild(imgCarta);
+    }
 
-    pontuacaoJogador = calcularPontuacao(maoJogador);
-    pontuacaoJogadorEl.textContent = pontuacaoJogador;
+
+
+    mao1Container.classList.toggle('mao-ativa', emModoSplit && maoAtivaIndex === 1);
+    mao2Container.classList.toggle('mao-ativa', emModoSplit && maoAtivaIndex === 2);
+
+    renderizarMaoDealer(false);
 }
 
 function duplicarAposta() {
-    
     if (betsaldo < apostaAtual) {
         mensagemResultadoEl.textContent = "Saldo insuficiente para duplicar a aposta!";
         return;
     }
 
-    
     betsaldo -= apostaAtual;
-    apostaAtual *= 2; 
+    apostaAtual *= 2;
     atualizarSaldoNaTela();
     atualizarApostaNaTela();
 
-    
     btnPedir.hidden = true;
     btnParar.hidden = true;
-    btnduplicar.hidden = true; 
+    btnduplicar.hidden = true;
+    btnDividir.hidden = true;
 
     maoJogador.push(pegarCarta());
-    renderizarAposPedir();
+    renderizarMaos();
 
-        
     setTimeout(turnoDealer, 1500);
-    
 }
+
 
 function iniciarAnimacaoDerrota() {
     var duration = 1 * 1000;
@@ -471,3 +578,4 @@ function pararAnimacao() {
 
 atualizarSaldoNaTela();
 prepararNovaRodada();
+

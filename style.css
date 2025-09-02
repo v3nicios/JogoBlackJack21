@@ -7,8 +7,6 @@ body {
     background-size: 100vh;
     color: white;
     text-align: center;
-
-
 }
 
 #area-jogo {
@@ -17,6 +15,13 @@ body {
     padding: 20px;
     background-color: #0a5c28;
     border-radius: 10px;
+}
+
+#area-jogador{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
 }
 
 
@@ -157,7 +162,7 @@ button:hover {
     cursor: pointer;
     box-shadow: 0 0 0 0 rgba(91, 228, 155, 0.7);
 
-    animation: pulsar 2s infinite;
+    animation: pulsar 1.5s infinite;
 }
 
 #dubliar{
@@ -166,7 +171,7 @@ button:hover {
     border: none;
     cursor: pointer;
     box-shadow: 0 0 0 0 rgba(0, 184, 217, 0.7);
-    animation: pulsar 2s infinite;
+    animation: pulsar 1.5s infinite;
 }
 
 
@@ -197,6 +202,19 @@ button:hover {
 
 .saldo {
     font-size: 0.5em;
+}
+
+.mao-container {
+    border: 1px solid transparent;
+    padding: 1px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    transition: border-color 0.3s;
+}
+
+.mao-ativa {
+    
+    border-color: #ffd700;
 }
 
 @media (max-width: 768px) {

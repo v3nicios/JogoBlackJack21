@@ -196,12 +196,17 @@ function finalizarJogo() {
     let valorGanho1 = 0;
     if (pontuacaoJogador > 21) {
         mensagemFinal += 'Mão 1: Você estourou!<br>';
+        iniciarAnimacaoDerrota();
+        
     } else if (pontuacaoDealer > 21 || pontuacaoJogador > pontuacaoDealer) {
         valorGanho1 = apostaAtual;
         betsaldo += apostaAtual * 2;
         mensagemFinal += `Mão 1: Você venceu! +${valorGanho1}<br>`;
+        vitoriafirework();
+        vitoriajogador();
     } else if (pontuacaoDealer > pontuacaoJogador) {
         mensagemFinal += 'Mão 1: Dealer venceu!<br>';
+        iniciarAnimacaoDerrota();
     } else {
         betsaldo += apostaAtual;
         mensagemFinal += 'Mão 1: Empate!<br>';
@@ -212,12 +217,17 @@ function finalizarJogo() {
         let valorGanho2 = 0;
         if (pontuacaoJogador2 > 21) {
             mensagemFinal += 'Mão 2: Você estourou!<br>';
+            iniciarAnimacaoDerrota();
+
         } else if (pontuacaoDealer > 21 || pontuacaoJogador2 > pontuacaoDealer) {
-            valorGanho2 = aposta2;
-            betsaldo += aposta2 * 2;
+            valorGanho2 = valorGanho1;
+            
             mensagemFinal += `Mão 2: Você venceu! +${valorGanho2}<br>`;
+            vitoriafirework();
+            vitoriajogador();
         } else if (pontuacaoDealer > pontuacaoJogador2) {
             mensagemFinal += 'Mão 2: Dealer venceu!<br>';
+            iniciarAnimacaoDerrota();
         } else {
             betsaldo += aposta2;
             mensagemFinal += 'Mão 2: Empate!<br>';

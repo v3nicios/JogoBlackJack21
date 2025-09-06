@@ -17,7 +17,7 @@ body {
     border-radius: 10px;
 }
 
-#area-jogador{
+#area-jogador {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -99,7 +99,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    gap: 5px;
     margin: 20px 0;
     border: 2px solid #ffd700;
     border-radius: 5px;
@@ -111,6 +112,8 @@ button {
 
 
 }
+
+/* . pra class, # para id */
 
 .area-ficha {
     display: flex;
@@ -165,7 +168,15 @@ button:hover {
     animation: pulsar 1.5s infinite;
 }
 
-#dubliar{
+.bet-label {
+    margin-top: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#dubliar,
+#btn-dividir {
     background-color: #D4B500;
     color: #ffffff;
     border: none;
@@ -213,7 +224,7 @@ button:hover {
 }
 
 .mao-ativa {
-    
+
     border-color: #ffd700;
 }
 
@@ -246,7 +257,7 @@ button:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 15px;
+        gap: 1px;
         margin: 20px 0;
         border: 2px solid #ffd700;
         border-radius: 5px;
@@ -333,12 +344,12 @@ button:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 15px;
-        margin: 20px 0;
+        gap: 1px;
+        margin: 0px 0;
         border: 2px solid #ffd700;
         border-radius: 5px;
-        width: 79px;
-        height: 62px;
+        width: 80px;
+        height: 66px;
         background-image: url(images/areabet.png);
         background-size: cover;
         background-repeat: no-repeat;
@@ -388,6 +399,13 @@ button:hover {
         align-items: center;
         gap: 24px;
         margin: 12px 0;
+    }
+
+    .bet-label {
+        margin-top: 5px;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: #ffffff;
     }
 }
 
@@ -420,12 +438,12 @@ button:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 15px;
-        margin: 20px 0;
+        gap: 1px;
+        margin: 0px 0;
         border: 2px solid #ffd700;
         border-radius: 5px;
-        width: 79px;
-        height: 62px;
+        width: 80px;
+        height: 66px;
         background-image: url(images/areabet.png);
         background-size: cover;
         background-repeat: no-repeat;
@@ -475,5 +493,12 @@ button:hover {
         align-items: center;
         gap: 24px;
         margin: 12px 0;
+    }
+
+    .bet-label {
+        margin-top: 5px;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: #ffffff;
     }
 }

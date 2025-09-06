@@ -11,6 +11,7 @@ let animationFrameId;
 let intervalId;
 let valorGanho = 0;
 let apostaAtivaParaExibir;
+let modoTesteAtivado = false;
 
 
 let maoJogador2 = [];
@@ -39,7 +40,9 @@ const btnFicha20 = document.getElementById('f20');
 const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
+const btwin = document.getElementById('teste');
 
+btwin.addEventListener('click', alternarModoTeste);
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
 btnNovoJogo.addEventListener('click', prepararNovaRodada, pararAnimacao);
@@ -79,35 +82,35 @@ function dividirMao() {
 
     atualizarApostaNaTela();
     const areaFichaContainer = document.querySelector('.area-ficha');
-     
+
 
     const areaBet1 = document.getElementById('area-bet-1');
-    if (!document.getElementById('label-mao-1')) { 
+    if (!document.getElementById('label-mao-1')) {
         const labelMao1 = document.createElement('span');
         labelMao1.id = 'label-mao-1';
-        labelMao1.className = 'bet-label'; 
+        labelMao1.className = 'bet-label';
         labelMao1.textContent = 'Mão 1';
         areaBet1.appendChild(labelMao1);
     }
 
 
-    
+
     if (!document.getElementById('area-bet-2')) {
         const novaAreaBet = document.createElement('div');
         novaAreaBet.className = 'area-bet';
-        novaAreaBet.id = 'area-bet-2'; 
+        novaAreaBet.id = 'area-bet-2';
 
         const novoBotaoFicha = document.createElement('button');
         novoBotaoFicha.className = 'fichinha';
 
-      
-        
+
+
         const novoSpanBet = document.createElement('span');
-        novoSpanBet.id = 'bet-jogador-2'; 
+        novoSpanBet.id = 'bet-jogador-2';
 
         novoBotaoFicha.appendChild(novoSpanBet);
         novaAreaBet.appendChild(novoBotaoFicha);
-        
+
         const labelMao2 = document.createElement('span');
         labelMao2.id = 'label-mao-2';
         labelMao2.className = 'bet-label';
@@ -115,10 +118,10 @@ function dividirMao() {
         novaAreaBet.appendChild(labelMao2);
 
         areaFichaContainer.appendChild(novaAreaBet);
-       
+
     }
-    
-    
+
+
     maoJogador2 = [maoJogador.pop()];
     maoJogador.push(pegarCarta());
     maoJogador2.push(pegarCarta());
@@ -127,7 +130,7 @@ function dividirMao() {
     btnduplicar.hidden = true;
 
     renderizarMaos();
-     
+
 
 }
 
@@ -165,10 +168,10 @@ function prepararNovaRodada() {
     if (labelMao1) {
         labelMao1.remove();
     }
-    
+
     cartasDealerEl.innerHTML = '';
     pontuacaoDealerEl.textContent = '';
-    
+
 
     mensagemResultadoEl.textContent = 'Faça sua aposta...';
     apostaAtualEl.textContent = '0';
@@ -418,21 +421,31 @@ function embaralharBaralho() {
     }
 }
 
-/* 
 function pegarCarta() {
-    return baralho.pop();
-
-} */
-
-
-function pegarCarta() {
-    if (baralhoDeTeste.length > 0) {
-        return baralhoDeTeste.shift();
+    
+    if (modoTesteAtivado) {
+        
+        console.log("%cMODO TESTE: Pegando carta do baralho de teste.", "color: orange; font-weight: bold;");
+        if (baralhoDeTeste.length > 0) {
+            return baralhoDeTeste.shift();
+        } else {
+            console.warn("Baralho de teste acabou!");
+            return { valor: 'K', naipe: 'C' }; 
+        }
     } else {
-        console.log("Baralho de teste acabou!");
-        return { valor: 'K', naipe: 'E' };
+        
+        return baralho.pop(); 
     }
 }
+
+function alternarModoTeste() {
+    
+    modoTesteAtivado = !modoTesteAtivado; 
+    console.log('Modo de Teste:', modoTesteAtivado ? 'ATIVADO' : 'DESATIVADO');
+    btwin.textContent = modoTesteAtivado ? 'TESTE (ON)' : 'TESTE (OFF)';
+    btwin.classList.toggle('teste-ativo', modoTesteAtivado);
+}
+
 
 const baralhoDeTeste = [
 
@@ -477,17 +490,17 @@ function atualizarApostaNaTela() {
 }
 
 function renderizarMaos() {
-   
+
     apostaAtualEl.textContent = apostaAtual;
 
     if (emModoSplit) {
-        
+
         const aposta2El = document.getElementById('bet-jogador-2');
         if (aposta2El) {
             aposta2El.textContent = aposta2;
         }
     }
-    
+
 
     pontuacaoJogador = calcularPontuacao(maoJogador);
     if (emModoSplit) {

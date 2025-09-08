@@ -42,6 +42,14 @@ const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
 const btwin = document.getElementById('teste');
 
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("dev")) {
+    btwin.style.display = "inline-block";
+} else {
+    btwin.style.display = "none";
+}
+btwin.addEventListener('click', alternarModoTeste);
+
 btwin.addEventListener('click', alternarModoTeste);
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
@@ -422,25 +430,25 @@ function embaralharBaralho() {
 }
 
 function pegarCarta() {
-    
+
     if (modoTesteAtivado) {
-        
+
         console.log("%cMODO TESTE: Pegando carta do baralho de teste.", "color: orange; font-weight: bold;");
         if (baralhoDeTeste.length > 0) {
             return baralhoDeTeste.shift();
         } else {
             console.warn("Baralho de teste acabou!");
-            return { valor: 'K', naipe: 'C' }; 
+            return { valor: 'K', naipe: 'C' };
         }
     } else {
-        
-        return baralho.pop(); 
+
+        return baralho.pop();
     }
 }
 
 function alternarModoTeste() {
-    
-    modoTesteAtivado = !modoTesteAtivado; 
+
+    modoTesteAtivado = !modoTesteAtivado;
     console.log('Modo de Teste:', modoTesteAtivado ? 'ATIVADO' : 'DESATIVADO');
     btwin.textContent = modoTesteAtivado ? 'TESTE (ON)' : 'TESTE (OFF)';
     btwin.classList.toggle('teste-ativo', modoTesteAtivado);

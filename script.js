@@ -8,7 +8,9 @@ let apostaAtual = 0;
 let jogadorTemBlackjack = false;
 let jogoEmAndamento = false;
 let animationFrameId;
-let intervalId;
+let intervalIdFogos;
+let intervalIdNaipe;
+let intervalidderrota;
 let valorGanho = 0;
 let apostaAtivaParaExibir;
 let modoTesteAtivado = false;
@@ -42,6 +44,7 @@ const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
 const btwin = document.getElementById('teste');
 
+//colocar ?dev na url pra ativar o modo desenvolverdor
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("dev")) {
     btwin.style.display = "inline-block";
@@ -53,7 +56,7 @@ btwin.addEventListener('click', alternarModoTeste);
 btwin.addEventListener('click', alternarModoTeste);
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
-btnNovoJogo.addEventListener('click', prepararNovaRodada, pararAnimacao);
+btnNovoJogo.addEventListener('click', prepararNovaRodada);
 btnPedir.addEventListener('click', pedirCarta);
 btnParar.addEventListener('click', pararMaoAtual);
 btnduplicar.addEventListener('click', duplicarAposta);
@@ -153,6 +156,7 @@ function zeraaposta() {
 
 
 function prepararNovaRodada() {
+    
     pararAnimacao();
     apostaAtual = 0;
     jogadorTemBlackjack = false;
@@ -211,6 +215,7 @@ function adicionarAposta(valor) {
 
 
 function iniciarJogo() {
+    
     if (apostaAtual === 0) {
         mensagemResultadoEl.textContent = "Você precisa apostar para jogar!";
         return;
@@ -605,7 +610,7 @@ function duplicarAposta() {
 
 
 function iniciarAnimacaoDerrota() {
-    var duration = 1 * 1000;
+    var duration = 2 * 1000;
     var animationEnd = Date.now() + duration;
     var skew = 1;
 
@@ -613,8 +618,15 @@ function iniciarAnimacaoDerrota() {
         return Math.random() * (max - min) + min;
     }
 
-    (function frame() {
+   
+    function frame() {
         var timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            
+            return;
+        }
+
         var ticks = Math.max(200, 500 * (timeLeft / duration));
         skew = Math.max(0.8, skew - 0.001);
 
@@ -626,7 +638,6 @@ function iniciarAnimacaoDerrota() {
                 x: Math.random(),
                 y: (Math.random() * skew) - 0.2
             },
-
             colors: ['#FF4136', '#85144b', '#B10DC9'],
             shapes: ['circle'],
             gravity: randomInRange(0.4, 0.6),
@@ -634,49 +645,67 @@ function iniciarAnimacaoDerrota() {
             drift: randomInRange(-0.4, 0.4)
         });
 
-        if (timeLeft > 0) {
-            animationFrameId = requestAnimationFrame(frame);
-        }
-    }());
+        
+        animationFrameId = requestAnimationFrame(frame);
+    }
+
+    frame();
 }
 
+
 function vitoriajogador() {
-    var end = Date.now() + (40 * 1000);
+    var duration = 2 * 1000; 
+    var animationEnd = Date.now() + duration;
+    var scalar = 2;
+    var paus = confetti.shapeFromText({ text: '♣️', scalar });
+    var copas = confetti.shapeFromText({ text: '♥️', scalar });
+    var espadas = confetti.shapeFromText({ text: '♠️', scalar });
+    var ouros = confetti.shapeFromText({ text: '♦️', scalar });
 
+    var varpaus = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [paus], scalar };
+    var varouros = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [ouros], scalar };
+    var varespadas = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [espadas], scalar };
+    var varcops = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [copas], scalar };
 
-    var colors = ['#D3AF37',
-        '#a31704ff',
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
 
-        '#ffffffff',
-        '#039203ff'
-
-
-    ];
-
-    (function frame() {
-        confetti({
-            particleCount: 2,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: colors
-        });
-        confetti({
-            particleCount: 2,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: colors
-        });
-
-        if (Date.now() < end) {
-            animationFrameId = requestAnimationFrame(frame);
+    intervalIdNaipe = setInterval(function shoot() {
+        
+        var timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+            return clearInterval(intervalIdNaipe); 
         }
-    }());
+
+        var particleCount = 15 * (timeLeft / duration);
+
+        confetti({
+            ...varpaus,
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+        });
+        confetti({
+            ...varcops,
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        });
+        confetti({
+            ...varespadas,
+            particleCount,
+            origin: { x: randomInRange(0.9, 0.9), y: Math.random() - 0.2 }
+        });
+        confetti({
+            ...varouros,
+            particleCount,
+            origin: { x: randomInRange(0.4, 0.3), y: Math.random() - 0.2 }
+        });
+
+    }, 250);
 }
 
 function vitoriafirework() {
-    var duration = 50 * 1000;
+    var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -690,11 +719,11 @@ function vitoriafirework() {
         '#039203ff'
     ];
 
-    intervalId = setInterval(function () {
+    intervalIdFogos = setInterval(function () {
         var timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
-            return clearInterval(intervalId);
+            return clearInterval(intervalIdFogos);
         }
 
         var particleCount = 50 * (timeLeft / duration);
@@ -709,23 +738,27 @@ function vitoriafirework() {
             colors: coresDaVitoria,
             origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
         });
+
+        
     }, 250);
 
 
 }
 
 function pararAnimacao() {
-
     if (animationFrameId) {
-
         cancelAnimationFrame(animationFrameId);
-
         animationFrameId = null;
     }
-    if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
+    if (intervalIdFogos) {
+        clearInterval(intervalIdFogos);
+        intervalIdFogos = null;
     }
+    if (intervalIdNaipe) {
+        clearInterval(intervalIdNaipe);
+        intervalIdNaipe = null;
+    }
+   
 }
 
 atualizarSaldoNaTela();

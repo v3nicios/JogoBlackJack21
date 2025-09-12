@@ -671,7 +671,7 @@ function iniciarAnimacaoDerrota() {
 
 
 function vitoriajogador() {
-    var duration = 5 * 1000;
+    var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
     var scalar = 2.2;
     var paus = confetti.shapeFromText({ text: '♣️', scalar });
@@ -696,7 +696,7 @@ function vitoriajogador() {
             return clearInterval(intervalIdNaipe);
         }
 
-        var particleCount = 15 * (timeLeft / duration);
+        var particleCount = 18 * (timeLeft / duration);
 
         confetti({
             ...varpaus,
@@ -723,7 +723,7 @@ function vitoriajogador() {
 }
 
 function vitoriafirework() {
-    var duration = 2 * 1000;
+    var duration = 4 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 

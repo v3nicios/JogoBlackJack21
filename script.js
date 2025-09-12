@@ -156,7 +156,7 @@ function zeraaposta() {
 
 
 function prepararNovaRodada() {
-    
+
     pararAnimacao();
     apostaAtual = 0;
     jogadorTemBlackjack = false;
@@ -215,7 +215,7 @@ function adicionarAposta(valor) {
 
 
 function iniciarJogo() {
-    
+
     if (apostaAtual === 0) {
         mensagemResultadoEl.textContent = "Você precisa apostar para jogar!";
         return;
@@ -471,6 +471,23 @@ const baralhoDeTeste = [
 
 
     { valor: '5', naipe: 'C' },
+    { valor: '5', naipe: 'P' },
+
+    { valor: 'K', naipe: 'C' },
+    { valor: 'K', naipe: 'C' },
+    { valor: 'K', naipe: 'C' },
+    { valor: 'K', naipe: 'C' },
+
+
+    { valor: '6', naipe: 'C' },
+    { valor: '6', naipe: 'P' },
+
+
+    { valor: 'A', naipe: 'E' },
+    { valor: '3', naipe: 'O' },
+
+
+    { valor: '5', naipe: 'C' },
     { valor: '5', naipe: 'P' }
 ];
 
@@ -610,7 +627,7 @@ function duplicarAposta() {
 
 
 function iniciarAnimacaoDerrota() {
-    var duration = 2 * 1000;
+    var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
     var skew = 1;
 
@@ -618,12 +635,12 @@ function iniciarAnimacaoDerrota() {
         return Math.random() * (max - min) + min;
     }
 
-   
+
     function frame() {
         var timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
-            
+
             return;
         }
 
@@ -631,7 +648,7 @@ function iniciarAnimacaoDerrota() {
         skew = Math.max(0.8, skew - 0.001);
 
         confetti({
-            particleCount: 10,
+            particleCount: 20,
             startVelocity: 0,
             ticks: ticks,
             origin: {
@@ -639,13 +656,13 @@ function iniciarAnimacaoDerrota() {
                 y: (Math.random() * skew) - 0.2
             },
             colors: ['#FF4136', '#85144b', '#B10DC9'],
-            shapes: ['circle'],
+            shapes: ['square'],
             gravity: randomInRange(0.4, 0.6),
             scalar: randomInRange(0.4, 1),
             drift: randomInRange(-0.4, 0.4)
         });
 
-        
+
         animationFrameId = requestAnimationFrame(frame);
     }
 
@@ -654,28 +671,29 @@ function iniciarAnimacaoDerrota() {
 
 
 function vitoriajogador() {
-    var duration = 2 * 1000; 
+    var duration = 5 * 1000;
     var animationEnd = Date.now() + duration;
-    var scalar = 2;
+    var scalar = 2.2;
     var paus = confetti.shapeFromText({ text: '♣️', scalar });
     var copas = confetti.shapeFromText({ text: '♥️', scalar });
     var espadas = confetti.shapeFromText({ text: '♠️', scalar });
     var ouros = confetti.shapeFromText({ text: '♦️', scalar });
 
     var varpaus = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [paus], scalar };
-    var varouros = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [ouros], scalar };
-    var varespadas = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [espadas], scalar };
-    var varcops = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [copas], scalar };
+    var varouros = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [ouros], scalar };
+    var varespadas = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [espadas], scalar };
+    var varcops = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [copas], scalar };
+    var varpaus = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [copas], scalar };
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
     }
 
     intervalIdNaipe = setInterval(function shoot() {
-        
+
         var timeLeft = animationEnd - Date.now();
         if (timeLeft <= 0) {
-            return clearInterval(intervalIdNaipe); 
+            return clearInterval(intervalIdNaipe);
         }
 
         var particleCount = 15 * (timeLeft / duration);
@@ -705,7 +723,7 @@ function vitoriajogador() {
 }
 
 function vitoriafirework() {
-    var duration = 10 * 1000;
+    var duration = 2 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -739,7 +757,7 @@ function vitoriafirework() {
             origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
         });
 
-        
+
     }, 250);
 
 
@@ -748,17 +766,21 @@ function vitoriafirework() {
 function pararAnimacao() {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
+        animationFrameId = null; 
     }
     if (intervalIdFogos) {
         clearInterval(intervalIdFogos);
         intervalIdFogos = null;
+        
+    
     }
     if (intervalIdNaipe) {
         clearInterval(intervalIdNaipe);
         intervalIdNaipe = null;
+       
     }
-   
+        confetti.reset();
+
 }
 
 atualizarSaldoNaTela();

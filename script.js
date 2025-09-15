@@ -673,17 +673,17 @@ function iniciarAnimacaoDerrota() {
 function vitoriajogador() {
     var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
-    var scalar = 2.2;
+    var scalar = 2;
     var paus = confetti.shapeFromText({ text: '♣️', scalar });
     var copas = confetti.shapeFromText({ text: '♥️', scalar });
     var espadas = confetti.shapeFromText({ text: '♠️', scalar });
     var ouros = confetti.shapeFromText({ text: '♦️', scalar });
 
     var varpaus = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [paus], scalar };
-    var varouros = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [ouros], scalar };
-    var varespadas = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [espadas], scalar };
-    var varcops = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [copas], scalar };
-    var varpaus = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [copas], scalar };
+    var varouros = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity:   20, shapes: [ouros], scalar };
+    var varespadas = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 20, shapes: [espadas], scalar };
+    var varcops = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity:    20, shapes: [copas], scalar };
+    var varpaus = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity:    20, shapes: [paus], scalar };
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
@@ -696,7 +696,7 @@ function vitoriajogador() {
             return clearInterval(intervalIdNaipe);
         }
 
-        var particleCount = 18 * (timeLeft / duration);
+        var particleCount = 11 * (timeLeft / duration);
 
         confetti({
             ...varpaus,
@@ -733,8 +733,8 @@ function vitoriafirework() {
     var coresDaVitoria = ['#D3AF37',
         '#a31704ff',
 
-        '#ffffffff',
-        '#039203ff'
+      
+        '#fcfcfcff'
     ];
 
     intervalIdFogos = setInterval(function () {
@@ -755,6 +755,11 @@ function vitoriafirework() {
             ...defaults, particleCount,
             colors: coresDaVitoria,
             origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        });
+        confetti({
+            ...defaults, particleCount,
+            colors: coresDaVitoria,
+            origin: { x: randomInRange(0.3, 0.6), y: Math.random() - 0.2 }
         });
 
 

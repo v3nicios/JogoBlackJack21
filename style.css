@@ -114,7 +114,17 @@ button {
 }
 
 /* . pra class, # para id */
-
+#qrcode{
+    display: flex;
+    justify-content: end;
+    width: 20px;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+#qrcode:hover{
+      transform: scale(10);
+}
 .area-ficha {
     display: flex;
     justify-content: center;

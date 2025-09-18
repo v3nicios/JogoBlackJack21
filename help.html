@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=New+Rocker&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <link rel="icon" href="images\favicon.ico" type="icon">
+</head>
+
+<body id="helpbody">
+   
+    <button class="Btn" onclick="window.location.href='index.html'" >
+
+        <div class="sign"><svg viewBox="0 0 512 512">
+                <path
+                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                </path>
+            </svg></div>
+
+        <div class="text">Sair</div>
+    </button>
+
+
+
+
+    <div id="textohelp">
+        <h1>Bem-vindo as dicas para o Blackjack!
+            <br> Vou te ajudar a se tornar um mestre na mesa.
+        </h1>
+    </div>
+    <div id="area-jogo">
+        <div class="area-ficha">
+            <div class="area-bet" id="area-bet-1">
+                <button id="beti" class="fichinha"><span id="bet-jogador"></span></button>
+            </div>
+        </div>
+        <div>Ao clicar na ficha central a sua aposta e zerada.</div>
+        <div id="fichas">
+            <button id="f05" class="fichinha">05</button>
+            <button id="f10" class="fichinha">10</button>
+            <button id="f20" class="fichinha">20</button>
+            <button id="f50" class="fichinha">50</button>
+            <button id="f100" class="fichinha">100</button>
+        </div>
+        <div> Clique nestas fichas para definir o valor da sua aposta.
+            <br>Cada clique adiciona o valor da ficha à sua aposta total e o subtrai do seu saldo.
+            <br>Você pode clicar várias vezes para aumentar a aposta.
+        </div>
+
+    </div>
+    <div id="helpbtn">
+        <button id="btn-pedir">PEDIR </button>
+        <button id="btn-parar">PARAR </button>
+        <button id="bet">APOSTAR</button>
+        <button id="dubliar">DUPLICAR</button>
+        <button id="btn-dividir">DIVIDIR</button>
+    </div>
+
+
+
+
+</body>
+
+</html>

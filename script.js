@@ -341,6 +341,10 @@ function turnoDealer() {
     btnduplicar.hidden = true;
     btnDividir.hidden = true;
     mensagemResultadoEl.textContent = "Turno do Dealer...";
+    if (!emModoSplit && pontuacaoJogador > 21) {
+        finalizarJogo();
+        return; 
+    }
 
     renderizarMaoDealer(true);
     setTimeout(puxarCartaDealer, 1500);
@@ -731,10 +735,7 @@ function vitoriafirework() {
         return Math.random() * (max - min) + min;
     }
     var coresDaVitoria = ['#D3AF37',
-        '#a31704ff',
-
-      
-        '#fcfcfcff'
+        '#a31704ff','#fcfcfcff'
     ];
 
     intervalIdFogos = setInterval(function () {

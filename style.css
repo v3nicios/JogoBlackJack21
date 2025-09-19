@@ -242,14 +242,18 @@ button:hover {
 
 #helpbtn {
     display: flex;
-    width: 590px;
+    width: 535px;
     gap: 4px;
     margin: 20px 0;
     padding: 20px;
     border-bottom: 2px solid #0a5c28;
     background: rgba(10, 92, 40, 0.8);
-    border-radius: 75px;
+    border-radius: 10px;
     flex-wrap: nowrap;
+    flex-direction: column
+
+
+ 
 
 }
 
@@ -518,7 +522,22 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+    #helpbtn {
+    display: flex;
+    width: 369px;
+    gap: 4px;
+    margin: 20px 0;
+    padding: 20px;
+    border-bottom: 2px solid #0a5c28;
+    background: rgba(10, 92, 40, 0.8);
+    border-radius: 10px;
+    flex-wrap: wrap;
+    flex-direction: column
 
+
+ 
+
+}
     .Btn {
     display: flex;
     align-items: center;
@@ -701,6 +720,22 @@ button:hover {
 }
 
 @media (max-width: 425px) {
+      #helpbtn {
+    display: flex;
+    width: 369px;
+    gap: 4px;
+    margin: 20px 0;
+    padding: 20px;
+    border-bottom: 2px solid #0a5c28;
+    background: rgba(10, 92, 40, 0.8);
+    border-radius: 10px;
+    flex-wrap: wrap;
+    flex-direction: column
+
+
+ 
+
+}
     .faq-button {
         width: 30px;
         height: 35px;

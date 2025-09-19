@@ -1,0 +1,43 @@
+const pontuacaoDealerEl = document.getElementById('pontuacao-dealer');
+const cartasDealerEl = document.getElementById('cartas-dealer');
+const mensagemResultadoEl = document.getElementById('mensagem-bnt');
+const saldobet = document.getElementById('saldojogador');
+const apostaAtualEl = document.getElementById('bet-jogador');
+
+const btnDividir = document.getElementById('btn-dividir');
+const btnPedir = document.getElementById('btn-pedir');
+const btnParar = document.getElementById('btn-parar');
+const btnNovoJogo = document.getElementById('btn-novo-jogo');
+const btnApostar = document.getElementById('bet');
+const btnduplicar = document.getElementById('dubliar')
+const btnFicha05 = document.getElementById('f05');
+const btnFicha10 = document.getElementById('f10');
+const btnFicha20 = document.getElementById('f20');
+const btnFicha50 = document.getElementById('f50');
+const btnFicha100 = document.getElementById('f100');
+const btnretibet = document.getElementById('beti');
+const btwin = document.getElementById('teste');
+
+btwin.addEventListener('click', alternarModoTeste);
+btnDividir.addEventListener('click', dividirMao);
+btnApostar.addEventListener('click', iniciarJogo);
+btnNovoJogo.addEventListener('click', prepararNovaRodada);
+btnPedir.addEventListener('click', pedirCarta);
+btnParar.addEventListener('click', pararMaoAtual);
+btnduplicar.addEventListener('click', duplicarAposta);
+btnretibet.addEventListener('click', zeraaposta);
+
+//btwin
+function alternarModoTeste(){
+    mensagemResultadoEl.innerHTML =
+        "Ao colocar o parametro ?dev na url esse botão ira aparecer. <br>" + 
+        "A função dele e criar um baralho alternativo para testar cenários e verificar aplicação de regras específicas.";
+}
+
+//btndividir
+function dividirMao(){
+    mensagemResultadoEl.innerHTML = "Este botão especial aparece apenas quando suas duas primeiras cartas têm o mesmo valor (ex: dois 8, duas Rainhas). <br>" +
+    "Ao clicar, sua mão é dividida em duas mãos separadas. <br>" +
+    "Uma aposta igual à original é feita na segunda mão, e você jogará cada uma de forma independente, uma após a outra."
+
+}

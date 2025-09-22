@@ -17,6 +17,8 @@ const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
 const btwin = document.getElementById('teste');
+const exemploPontuacaoEl = document.getElementById('exemplo-pontuacao');
+const exemploCartasEl = document.getElementById('exemplo-cartas');
 
 btwin.addEventListener('click', alternarModoTeste);
 btnDividir.addEventListener('click', dividirMao);
@@ -27,48 +29,111 @@ btnParar.addEventListener('click', pararMaoAtual);
 btnduplicar.addEventListener('click', duplicarAposta);
 btnretibet.addEventListener('click', zeraaposta);
 
+
 //btwin
-function alternarModoTeste(){
+function alternarModoTeste() {
+       limparExemplo();
     mensagemResultadoEl.innerHTML =
-        "Ao colocar o parametro ?dev na url esse botão ira aparecer. <br>" + 
+        "Ao colocar o parametro ?dev na url esse botão ira aparecer. <br>" +
         "A função dele e criar um baralho alternativo para testar cenários e verificar aplicação de regras específicas.";
 }
 
 //btndividir
-function dividirMao(){
+function dividirMao() {
+       limparExemplo();
     mensagemResultadoEl.innerHTML = "Este botão especial aparece apenas quando suas duas primeiras cartas têm o mesmo valor (ex: dois 8, duas Rainhas). <br>" +
-    "Ao clicar, sua mão é dividida em duas mãos separadas. <br>" +
-    "Uma aposta igual à original é feita na segunda mão, e você jogará cada uma de forma independente, uma após a outra."
-
+        "Ao clicar, sua mão é dividida em duas mãos separadas. <br>" +
+        "Uma aposta igual à original é feita na segunda mão, e você jogará cada uma de forma independente, uma após a outra."
+  
+    let maoExemplo = [{ valor: '8', naipe: 'C' }, { valor: '8', naipe: 'P' }];
+    renderizarExemplo(maoExemplo);
 }
 
 //btnPedir
-function pedirCarta(){
+function pedirCarta() {
+       limparExemplo();
     mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
-    + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
+        + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
 }
 
 //btnApostar
-function iniciarJogo(){
+function iniciarJogo() {
+       limparExemplo();
     mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
-    + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
+        + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
 }
 //novo jogo
-function prepararNovaRodada(){
+function prepararNovaRodada() {
+       limparExemplo();
     mensagemResultadoEl.innerHTML = "Este botão aparece quando a rodada termina.<br> Clique nele para limpar a mesa e começar a fase de apostas para uma nova mão."
 }
 
 //btnParar
-function pararMaoAtual(){
+function pararMaoAtual() {
+       limparExemplo();
     mensagemResultadoEl.innerHTML = "Quando estiver satisfeito com a sua pontuação e não quiser mais cartas, <br> clique em 'Parar'. <br> Você manterá sua mão atual e a vez passará para o dealer."
 
 }
 //btnduplicar
-function duplicarAposta(){
-    mensagemResultadoEl.innerHTML = "Esta é uma jogada de risco e alta recompensa! <br> Ao clicar, você dobra o valor da sua aposta original, recebe exatamente mais uma carta e sua vez termina automaticamente. <br> Este botão aparece quando sua mão inicial soma 10 ou 11."
+function duplicarAposta() {
 
+ mensagemResultadoEl.innerHTML = "Você dobra sua aposta, recebe apenas mais uma carta e sua vez termina. É uma jogada de alto risco e recompensa!";
+
+   
+    let maoExemplo = [{ valor: '7', naipe: 'C' }, { valor: '4', naipe: 'C' }];
+    renderizarExemplo(maoExemplo);
+
+    
+    setTimeout(() => {
+        
+        const cartaFinal = { valor: 'K', naipe: 'E' };
+        maoExemplo.push(cartaFinal);
+        renderizarExemplo(maoExemplo);
+  
+    }, 3500); 
 }
 
-function zeraaposta(){
+
+
+function zeraaposta() {
+    limparExemplo();
     mensagemResultadoEl.innerHTML = "Apos clicar nele a aposta e zerada."
+}
+
+function limparExemplo() {
+    exemploPontuacaoEl.textContent = '';
+    exemploCartasEl.innerHTML = '';
+}
+
+function calcularPontuacao(mao) {
+    let pontuacao = 0;
+    let ases = 0;
+    for (let carta of mao) {
+        if (['J', 'Q', 'K'].includes(carta.valor)) {
+            pontuacao += 10;
+        } else if (carta.valor === 'A') {
+            ases += 1;
+            pontuacao += 11;
+        } else {
+            pontuacao += parseInt(carta.valor);
+        }
+    }
+    while (pontuacao > 21 && ases > 0) {
+        pontuacao -= 10;
+        ases--;
+    }
+    return pontuacao;
+}
+
+function renderizarExemplo(mao) {
+    limparExemplo();
+    const pontuacao = calcularPontuacao(mao);
+    exemploPontuacaoEl.textContent = `Pontuação: ${pontuacao}`;
+    
+    mao.forEach(carta => {
+        const imgCarta = document.createElement('img');
+       
+        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`; 
+        exemploCartasEl.appendChild(imgCarta);
+    });
 }

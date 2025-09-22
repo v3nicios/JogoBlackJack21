@@ -41,3 +41,34 @@ function dividirMao(){
     "Uma aposta igual à original é feita na segunda mão, e você jogará cada uma de forma independente, uma após a outra."
 
 }
+
+//btnPedir
+function pedirCarta(){
+    mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
+    + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
+}
+
+//btnApostar
+function iniciarJogo(){
+    mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
+    + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
+}
+//novo jogo
+function prepararNovaRodada(){
+    mensagemResultadoEl.innerHTML = "Este botão aparece quando a rodada termina.<br> Clique nele para limpar a mesa e começar a fase de apostas para uma nova mão."
+}
+
+//btnParar
+function pararMaoAtual(){
+    mensagemResultadoEl.innerHTML = "Quando estiver satisfeito com a sua pontuação e não quiser mais cartas, <br> clique em 'Parar'. <br> Você manterá sua mão atual e a vez passará para o dealer."
+
+}
+//btnduplicar
+function duplicarAposta(){
+    mensagemResultadoEl.innerHTML = "Esta é uma jogada de risco e alta recompensa! <br> Ao clicar, você dobra o valor da sua aposta original, recebe exatamente mais uma carta e sua vez termina automaticamente. <br> Este botão aparece quando sua mão inicial soma 10 ou 11."
+
+}
+
+function zeraaposta(){
+    mensagemResultadoEl.innerHTML = "Apos clicar nele a aposta e zerada."
+}

@@ -16,11 +16,11 @@ const btnFicha20 = document.getElementById('f20');
 const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
-const btwin = document.getElementById('teste');
+
 const exemploPontuacaoEl = document.getElementById('exemplo-pontuacao');
 const exemploCartasEl = document.getElementById('exemplo-cartas');
 
-btwin.addEventListener('click', alternarModoTeste);
+
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
 btnNovoJogo.addEventListener('click', prepararNovaRodada);
@@ -30,13 +30,7 @@ btnduplicar.addEventListener('click', duplicarAposta);
 btnretibet.addEventListener('click', zeraaposta);
 
 
-//btwin
-function alternarModoTeste() {
-       limparExemplo();
-    mensagemResultadoEl.innerHTML =
-        "Ao colocar o parametro ?dev na url esse botão ira aparecer. <br>" +
-        "A função dele e criar um baralho alternativo para testar cenários e verificar aplicação de regras específicas.";
-}
+
 
 //btndividir
 function dividirMao() {
@@ -85,7 +79,7 @@ function duplicarAposta() {
 
     
     setTimeout(() => {
-        
+        mensagemResultadoEl.innerHTML = "Esse e um exemplo que pode acontecer em um jogo real.";
         const cartaFinal = { valor: 'K', naipe: 'E' };
         maoExemplo.push(cartaFinal);
         renderizarExemplo(maoExemplo);

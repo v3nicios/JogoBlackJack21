@@ -20,6 +20,12 @@ const btnretibet = document.getElementById('beti');
 const exemploPontuacaoEl = document.getElementById('exemplo-pontuacao');
 const exemploCartasEl = document.getElementById('exemplo-cartas');
 
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("dev")) {
+    document.getElementById("qrcode").style.display = "flex";
+} else {
+    document.getElementById("qrcode").style.display= "none";
+}
 
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);

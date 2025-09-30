@@ -127,14 +127,12 @@ button {
 #qrcode {
     display: flex;
     justify-content: end;
-    width: 20px;
-    position: absolute;
-    top: 40px;
-    left: 40px;
+    width: 200px;
+ 
 }
 
 #qrcode:hover {
-    transform: scale(10);
+    transform: scale(2);
 }
 
 .area-ficha {

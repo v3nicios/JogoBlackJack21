@@ -14,8 +14,7 @@ let intervalidderrota;
 let valorGanho = 0;
 let apostaAtivaParaExibir;
 let modoTesteAtivado = false;
-
-
+let somAtivo = true; 
 let maoJogador2 = [];
 let pontuacaoJogador2 = 0;
 let aposta2 = 0;
@@ -43,6 +42,10 @@ const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
 const btwin = document.getElementById('teste');
+const somdaaposta = document.getElementById('somAposta');
+const somdaficha = document.getElementById('somdeficha');
+const perdeu = document.getElementById('perdeu');
+const btnToggleSom = document.getElementById('btn-toggle-som'); 
 
 //colocar ?dev na url pra ativar o modo desenvolverdor
 const urlParams = new URLSearchParams(window.location.search);
@@ -51,7 +54,8 @@ if (urlParams.has("dev")) {
 } else {
     btwin.style.display = "none";
 }
-btwin.addEventListener('click', alternarModoTeste);
+btnToggleSom.addEventListener('click', toggleSom);
+
 
 btwin.addEventListener('click', alternarModoTeste);
 btnDividir.addEventListener('click', dividirMao);
@@ -66,6 +70,29 @@ btnFicha10.addEventListener('click', function () { adicionarAposta(10) });
 btnFicha20.addEventListener('click', function () { adicionarAposta(20) });
 btnFicha50.addEventListener('click', function () { adicionarAposta(50) });
 btnFicha100.addEventListener('click', function () { adicionarAposta(100) });
+
+
+
+
+function toggleSom() {
+    somAtivo = !somAtivo; 
+
+    if (somAtivo) {
+        btnToggleSom.textContent = '🔊'; 
+      
+    } else {
+        btnToggleSom.textContent = '🔇'; 
+    }
+}
+
+function tocarSom(elementoAudio) {
+    if (somAtivo) {
+       
+        elementoAudio.currentTime = 0;
+        elementoAudio.play().catch(e => console.log("Erro ao tocar áudio:", e)); 
+     
+    }
+}
 
 
 function pararMaoAtual() {
@@ -146,6 +173,7 @@ function dividirMao() {
 }
 
 function zeraaposta() {
+     tocarSom(somdaaposta);
     if (!jogoEmAndamento) {
         betsaldo += apostaAtual;
         apostaAtual = 0;
@@ -203,6 +231,7 @@ function prepararNovaRodada() {
 }
 
 function adicionarAposta(valor) {
+     tocarSom(somdaficha);
     if (!jogoEmAndamento && betsaldo >= valor) {
         apostaAtual += valor;
         betsaldo -= valor;
@@ -215,7 +244,8 @@ function adicionarAposta(valor) {
 
 
 function iniciarJogo() {
-
+   tocarSom(somdaaposta);
+    
     if (apostaAtual === 0) {
         mensagemResultadoEl.textContent = "Você precisa apostar para jogar!";
         return;
@@ -343,7 +373,7 @@ function turnoDealer() {
     mensagemResultadoEl.textContent = "Turno do Dealer...";
     if (!emModoSplit && pontuacaoJogador > 21) {
         finalizarJogo();
-        return; 
+        return;
     }
 
     renderizarMaoDealer(true);
@@ -631,6 +661,7 @@ function duplicarAposta() {
 
 
 function iniciarAnimacaoDerrota() {
+      tocarSom(perdeu);
     var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
     var skew = 1;
@@ -684,10 +715,10 @@ function vitoriajogador() {
     var ouros = confetti.shapeFromText({ text: '♦️', scalar });
 
     var varpaus = { spread: 360, ticks: 100, gravity: 0, decay: 0.96, startVelocity: 15, shapes: [paus], scalar };
-    var varouros = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity:   20, shapes: [ouros], scalar };
+    var varouros = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 20, shapes: [ouros], scalar };
     var varespadas = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 20, shapes: [espadas], scalar };
-    var varcops = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity:    20, shapes: [copas], scalar };
-    var varpaus = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity:    20, shapes: [paus], scalar };
+    var varcops = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 20, shapes: [copas], scalar };
+    var varpaus = { spread: 360, ticks: 300, gravity: 0, decay: 0.96, startVelocity: 20, shapes: [paus], scalar };
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
@@ -735,7 +766,7 @@ function vitoriafirework() {
         return Math.random() * (max - min) + min;
     }
     var coresDaVitoria = ['#D3AF37',
-        '#a31704ff','#fcfcfcff'
+        '#a31704ff', '#fcfcfcff'
     ];
 
     intervalIdFogos = setInterval(function () {
@@ -772,20 +803,20 @@ function vitoriafirework() {
 function pararAnimacao() {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
-        animationFrameId = null; 
+        animationFrameId = null;
     }
     if (intervalIdFogos) {
         clearInterval(intervalIdFogos);
         intervalIdFogos = null;
-        
-    
+
+
     }
     if (intervalIdNaipe) {
         clearInterval(intervalIdNaipe);
         intervalIdNaipe = null;
-       
+
     }
-        confetti.reset();
+    confetti.reset();
 
 }
 

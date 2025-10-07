@@ -1,3 +1,5 @@
+let somAtivo = true;
+
 const pontuacaoDealerEl = document.getElementById('pontuacao-dealer');
 const cartasDealerEl = document.getElementById('cartas-dealer');
 const mensagemResultadoEl = document.getElementById('mensagem-bnt');
@@ -9,14 +11,16 @@ const btnPedir = document.getElementById('btn-pedir');
 const btnParar = document.getElementById('btn-parar');
 const btnNovoJogo = document.getElementById('btn-novo-jogo');
 const btnApostar = document.getElementById('bet');
-const btnduplicar = document.getElementById('dubliar')
+const btnduplicar = document.getElementById('dubliar');
 const btnFicha05 = document.getElementById('f05');
 const btnFicha10 = document.getElementById('f10');
 const btnFicha20 = document.getElementById('f20');
 const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
+const somdaaposta = document.getElementById('somAposta');
 
+const btnToggleSom = document.getElementById('btn-toggle-som');
 const exemploPontuacaoEl = document.getElementById('exemplo-pontuacao');
 const exemploCartasEl = document.getElementById('exemplo-cartas');
 
@@ -24,7 +28,7 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("dev")) {
     document.getElementById("qrcode").style.display = "flex";
 } else {
-    document.getElementById("qrcode").style.display= "none";
+    document.getElementById("qrcode").style.display = "none";
 }
 
 btnDividir.addEventListener('click', dividirMao);
@@ -35,67 +39,94 @@ btnParar.addEventListener('click', pararMaoAtual);
 btnduplicar.addEventListener('click', duplicarAposta);
 btnretibet.addEventListener('click', zeraaposta);
 
+btnToggleSom.addEventListener('click', toggleSom);
 
+function toggleSom() {
+    somAtivo = !somAtivo;
+
+    if (somAtivo) {
+        btnToggleSom.textContent = '🔊';
+
+    } else {
+        btnToggleSom.textContent = '🔇';
+    }
+}
+
+function tocarSom(elementoAudio) {
+    if (somAtivo) {
+
+        elementoAudio.currentTime = 0;
+        elementoAudio.play().catch(e => console.log("Erro ao tocar áudio:", e));
+
+    }
+}
 
 
 //btndividir
 function dividirMao() {
-       limparExemplo();
+    tocarSom(somdaaposta);
+    limparExemplo();
     mensagemResultadoEl.innerHTML = "Este botão especial aparece apenas quando suas duas primeiras cartas têm o mesmo valor (ex: dois 8, duas Rainhas). <br>" +
         "Ao clicar, sua mão é dividida em duas mãos separadas. <br>" +
         "Uma aposta igual à original é feita na segunda mão, e você jogará cada uma de forma independente, uma após a outra."
-  
+
     let maoExemplo = [{ valor: '8', naipe: 'C' }, { valor: '8', naipe: 'P' }];
     renderizarExemplo(maoExemplo);
 }
 
 //btnPedir
 function pedirCarta() {
-       limparExemplo();
+    tocarSom(somdaaposta);
+    limparExemplo();
     mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
         + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
 }
 
 //btnApostar
 function iniciarJogo() {
-       limparExemplo();
+    tocarSom(somdaaposta);
+    limparExemplo();
     mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
         + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
 }
 //novo jogo
 function prepararNovaRodada() {
-       limparExemplo();
+    tocarSom(somdaaposta);
+    limparExemplo();
     mensagemResultadoEl.innerHTML = "Este botão aparece quando a rodada termina.<br> Clique nele para limpar a mesa e começar a fase de apostas para uma nova mão."
 }
 
 //btnParar
 function pararMaoAtual() {
-       limparExemplo();
+    tocarSom(somdaaposta);
+    limparExemplo();
     mensagemResultadoEl.innerHTML = "Quando estiver satisfeito com a sua pontuação e não quiser mais cartas, <br> clique em 'Parar'. <br> Você manterá sua mão atual e a vez passará para o dealer."
 
 }
 //btnduplicar
 function duplicarAposta() {
+    tocarSom(somdaaposta);
 
- mensagemResultadoEl.innerHTML = "Você dobra sua aposta, recebe apenas mais uma carta e sua vez termina. É uma jogada de alto risco e recompensa!";
+    mensagemResultadoEl.innerHTML = "Você dobra sua aposta, recebe apenas mais uma carta e sua vez termina. É uma jogada de alto risco e recompensa!";
 
-   
+
     let maoExemplo = [{ valor: '7', naipe: 'C' }, { valor: '4', naipe: 'C' }];
     renderizarExemplo(maoExemplo);
 
-    
+
     setTimeout(() => {
         mensagemResultadoEl.innerHTML = "Esse e um exemplo que pode acontecer em um jogo real.";
         const cartaFinal = { valor: 'K', naipe: 'E' };
         maoExemplo.push(cartaFinal);
         renderizarExemplo(maoExemplo);
-  
-    }, 3500); 
+
+    }, 3500);
 }
 
 
 
 function zeraaposta() {
+    tocarSom(somdaaposta);
     limparExemplo();
     mensagemResultadoEl.innerHTML = "Apos clicar nele a aposta e zerada."
 }
@@ -129,11 +160,11 @@ function renderizarExemplo(mao) {
     limparExemplo();
     const pontuacao = calcularPontuacao(mao);
     exemploPontuacaoEl.textContent = `Pontuação: ${pontuacao}`;
-    
+
     mao.forEach(carta => {
         const imgCarta = document.createElement('img');
-       
-        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`; 
+
+        imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
         exemploCartasEl.appendChild(imgCarta);
     });
 }

@@ -45,6 +45,9 @@ const btwin = document.getElementById('teste');
 const somdaaposta = document.getElementById('somAposta');
 const somdaficha = document.getElementById('somdeficha');
 const perdeu = document.getElementById('perdeu');
+const venceu = document.getElementById('venceu');
+const estouro = document.getElementById('estouro');
+const smzinho = document.getElementById('smzinho');
 const btnToggleSom = document.getElementById('btn-toggle-som'); 
 
 //colocar ?dev na url pra ativar o modo desenvolverdor
@@ -96,6 +99,7 @@ function tocarSom(elementoAudio) {
 
 
 function pararMaoAtual() {
+      tocarSom(somdaaposta);
     if (emModoSplit && maoAtivaIndex === 1) {
         maoAtivaIndex = 2;
         renderizarMaos();
@@ -104,7 +108,8 @@ function pararMaoAtual() {
     }
 }
 
-function dividirMao() {
+function dividirMao() { 
+     tocarSom(somdaaposta);
     if (betsaldo < apostaAtual) {
         mensagemResultadoEl.textContent = "Saldo insuficiente para dividir!";
         return;
@@ -173,7 +178,7 @@ function dividirMao() {
 }
 
 function zeraaposta() {
-     tocarSom(somdaaposta);
+     tocarSom(somdaficha);
     if (!jogoEmAndamento) {
         betsaldo += apostaAtual;
         apostaAtual = 0;
@@ -184,6 +189,7 @@ function zeraaposta() {
 
 
 function prepararNovaRodada() {
+    tocarSom(somdaaposta);
 
     pararAnimacao();
     apostaAtual = 0;
@@ -282,6 +288,7 @@ function iniciarJogo() {
      } */
 
     if (pontuacaoJogador === 21) {
+        tocarSom(smzinho);
         jogadorTemBlackjack = true;
         mensagemResultadoEl.textContent = "Blackjack!";
         setTimeout(turnoDealer, 1500);
@@ -294,21 +301,23 @@ function finalizarJogo() {
 
     let valorGanho1 = 0;
     if (pontuacaoJogador > 21) {
-        mensagemFinal += 'Mão 1: Você estourou!<br>';
+        mensagemFinal += 'Você estourou!<br>';
         iniciarAnimacaoDerrota();
+        tocarSom(estouro);
 
     } else if (pontuacaoDealer > 21 || pontuacaoJogador > pontuacaoDealer) {
         valorGanho1 = apostaAtual;
         betsaldo += apostaAtual * 2;
-        mensagemFinal += `Mão 1: Você venceu! +${valorGanho1}<br>`;
+        mensagemFinal += `Você venceu! +${valorGanho1}<br>`;
+        tocarSom(venceu);
         vitoriafirework();
         vitoriajogador();
     } else if (pontuacaoDealer > pontuacaoJogador) {
-        mensagemFinal += 'Mão 1: Dealer venceu!<br>';
+        mensagemFinal += 'Dealer venceu!<br>';
         iniciarAnimacaoDerrota();
     } else {
         betsaldo += apostaAtual;
-        mensagemFinal += 'Mão 1: Empate!<br>';
+        mensagemFinal += 'Empate!<br>';
     }
 
 
@@ -316,12 +325,15 @@ function finalizarJogo() {
         let valorGanho2 = 0;
         if (pontuacaoJogador2 > 21) {
             mensagemFinal += 'Mão 2: Você estourou!<br>';
+               tocarSom(estouro);
             iniciarAnimacaoDerrota();
+
 
         } else if (pontuacaoDealer > 21 || pontuacaoJogador2 > pontuacaoDealer) {
             valorGanho2 = aposta2;
             betsaldo += aposta2 * 2;
             mensagemFinal += `Mão 2: Você venceu! +${valorGanho2}<br>`;
+            tocarSom(venceu);
             vitoriafirework();
             vitoriajogador();
         } else if (pontuacaoDealer > pontuacaoJogador2) {
@@ -421,6 +433,7 @@ function puxarCartaDealer() {
 
 
 function pedirCarta() {
+      tocarSom(somdaaposta);
     if (!jogoEmAndamento) return;
     btnduplicar.hidden = true;
     btnDividir.hidden = true;
@@ -609,6 +622,7 @@ function renderizarMaos() {
     renderizarMaoDealer(false);
 }
 function duplicarAposta() {
+      tocarSom(somdaaposta);
     if (emModoSplit) {
 
         let apostaAtiva = (maoAtivaIndex === 1) ? apostaAtual : aposta2;
@@ -661,7 +675,7 @@ function duplicarAposta() {
 
 
 function iniciarAnimacaoDerrota() {
-      tocarSom(perdeu);
+    tocarSom(perdeu);
     var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
     var skew = 1;

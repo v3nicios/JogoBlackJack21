@@ -195,6 +195,7 @@ function prepararNovaRodada() {
     apostaAtual = 0;
     jogadorTemBlackjack = false;
     jogoEmAndamento = false;
+    document.getElementById('black').style.display = "block";
 
 
     emModoSplit = false;
@@ -260,8 +261,11 @@ function iniciarJogo() {
     jogoEmAndamento = true;
 
     document.getElementById('fichas').style.display = "none";
+    document.getElementById('black').style.display = "none";
     document.getElementById('area-dealer').hidden = false;
     document.getElementById('area-jogador').hidden = false;
+    
+
     btnApostar.hidden = true;
     btnPedir.hidden = false;
     btnParar.hidden = false;
@@ -509,31 +513,34 @@ function alternarModoTeste() {
 
 const baralhoDeTeste = [
 
-    { valor: '6', naipe: 'C' },
-    { valor: '6', naipe: 'P' },
+    { valor: 'K', naipe: 'C' },
+    { valor: 'A', naipe: 'P' },
 
 
     { valor: 'A', naipe: 'E' },
     { valor: '3', naipe: 'O' },
 
-
+    //O DEALER VAI PUXAR ESSA
     { valor: '5', naipe: 'C' },
-    { valor: '5', naipe: 'P' },
 
-    { valor: 'K', naipe: 'C' },
-    { valor: 'K', naipe: 'C' },
-    { valor: 'K', naipe: 'C' },
-    { valor: 'K', naipe: 'C' },
-
-
-    { valor: '6', naipe: 'C' },
+    //PROXIMA COMBINAÇÃO DE CARTAS
     { valor: '6', naipe: 'P' },
+    { valor: '6', naipe: 'C' },
 
+    // DEALER
+    { valor: '7', naipe: 'C' },
+    { valor: '8', naipe: 'C' },
 
+    //PROXIMA A SER PUXADA NO DIVIDIR
+    { valor: '5', naipe: 'C' },
+    { valor: '4', naipe: 'C' },
+    
+    //PROXIMA DO PEGAR CARTA
+    { valor: 'K', naipe: 'P' },
     { valor: 'A', naipe: 'E' },
     { valor: '3', naipe: 'O' },
 
-
+    //OPÇÕES
     { valor: '5', naipe: 'C' },
     { valor: '5', naipe: 'P' }
 ];

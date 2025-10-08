@@ -653,7 +653,7 @@ button:hover {
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
         position: fixed;
-        right: 10px;
+        right: 0px;
         bottom: 10px;
         padding: 10px;
     }
@@ -873,7 +873,7 @@ button:hover {
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
         position: fixed;
         right: 0px;
-        bottom: 0px;
+        bottom: 10px;
         padding: 10px;
 
     }
@@ -990,7 +990,7 @@ button:hover {
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
         position: fixed;
-        right: 10px;
+        right: 0px;
         bottom: 10px;
         padding: 10px;
 
@@ -1043,8 +1043,8 @@ button:hover {
 
 
         .faq-button {
-            width: 30px;
-            height: 35px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             border: none;
             background-color: #0a5c28;
@@ -1056,8 +1056,8 @@ button:hover {
             box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
             position: absolute;
             right: 0px;
-            bottom: 0px;
-            padding: 10px;
+            bottom: 10px;
+            padding: 6px;
         }
 
         .faq-button svg {
@@ -1173,7 +1173,7 @@ button:hover {
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
         position: fixed;
-        right: 1px;
+        right: 0px;
         bottom: 50px;
         padding: 6px;
     }

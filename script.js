@@ -629,7 +629,7 @@ function renderizarMaos() {
     renderizarMaoDealer(false);
 }
 function duplicarAposta() {
-      tocarSom(somdaaposta);
+       tocarSom(smzinho);
     if (emModoSplit) {
 
         let apostaAtiva = (maoAtivaIndex === 1) ? apostaAtual : aposta2;

@@ -14,7 +14,7 @@ let intervalidderrota;
 let valorGanho = 0;
 let apostaAtivaParaExibir;
 let modoTesteAtivado = false;
-let somAtivo = true; 
+let somAtivo = true;
 let maoJogador2 = [];
 let pontuacaoJogador2 = 0;
 let aposta2 = 0;
@@ -48,7 +48,7 @@ const perdeu = document.getElementById('perdeu');
 const venceu = document.getElementById('venceu');
 const estouro = document.getElementById('estouro');
 const smzinho = document.getElementById('smzinho');
-const btnToggleSom = document.getElementById('btn-toggle-som'); 
+const btnToggleSom = document.getElementById('btn-toggle-som');
 
 //colocar ?dev na url pra ativar o modo desenvolverdor
 const urlParams = new URLSearchParams(window.location.search);
@@ -78,28 +78,28 @@ btnFicha100.addEventListener('click', function () { adicionarAposta(100) });
 
 
 function toggleSom() {
-    somAtivo = !somAtivo; 
+    somAtivo = !somAtivo;
 
     if (somAtivo) {
-        btnToggleSom.textContent = '🔊'; 
-      
+        btnToggleSom.textContent = '🔊';
+
     } else {
-        btnToggleSom.textContent = '🔇'; 
+        btnToggleSom.textContent = '🔇';
     }
 }
 
 function tocarSom(elementoAudio) {
     if (somAtivo) {
-       
+
         elementoAudio.currentTime = 0;
-        elementoAudio.play().catch(e => console.log("Erro ao tocar áudio:", e)); 
-     
+        elementoAudio.play().catch(e => console.log("Erro ao tocar áudio:", e));
+
     }
 }
 
 
 function pararMaoAtual() {
-      tocarSom(somdaaposta);
+    tocarSom(somdaaposta);
     if (emModoSplit && maoAtivaIndex === 1) {
         maoAtivaIndex = 2;
         renderizarMaos();
@@ -108,8 +108,8 @@ function pararMaoAtual() {
     }
 }
 
-function dividirMao() { 
-     tocarSom(somdaaposta);
+function dividirMao() {
+    tocarSom(somdaaposta);
     if (betsaldo < apostaAtual) {
         mensagemResultadoEl.textContent = "Saldo insuficiente para dividir!";
         return;
@@ -178,7 +178,7 @@ function dividirMao() {
 }
 
 function zeraaposta() {
-     tocarSom(somdaficha);
+    tocarSom(somdaficha);
     if (!jogoEmAndamento) {
         betsaldo += apostaAtual;
         apostaAtual = 0;
@@ -238,7 +238,7 @@ function prepararNovaRodada() {
 }
 
 function adicionarAposta(valor) {
-     tocarSom(somdaficha);
+    tocarSom(somdaficha);
     if (!jogoEmAndamento && betsaldo >= valor) {
         apostaAtual += valor;
         betsaldo -= valor;
@@ -251,8 +251,8 @@ function adicionarAposta(valor) {
 
 
 function iniciarJogo() {
-   tocarSom(somdaaposta);
-    
+    tocarSom(somdaaposta);
+
     if (apostaAtual === 0) {
         mensagemResultadoEl.textContent = "Você precisa apostar para jogar!";
         return;
@@ -264,7 +264,7 @@ function iniciarJogo() {
     document.getElementById('black').style.display = "none";
     document.getElementById('area-dealer').hidden = false;
     document.getElementById('area-jogador').hidden = false;
-    
+
 
     btnApostar.hidden = true;
     btnPedir.hidden = false;
@@ -329,7 +329,7 @@ function finalizarJogo() {
         let valorGanho2 = 0;
         if (pontuacaoJogador2 > 21) {
             mensagemFinal += 'Mão 2: Você estourou!<br>';
-               tocarSom(estouro);
+            tocarSom(estouro);
             iniciarAnimacaoDerrota();
 
 
@@ -437,7 +437,7 @@ function puxarCartaDealer() {
 
 
 function pedirCarta() {
-      tocarSom(somdaaposta);
+    tocarSom(somdaaposta);
     if (!jogoEmAndamento) return;
     btnduplicar.hidden = true;
     btnDividir.hidden = true;
@@ -534,7 +534,7 @@ const baralhoDeTeste = [
     //PROXIMA A SER PUXADA NO DIVIDIR
     { valor: '5', naipe: 'C' },
     { valor: '4', naipe: 'C' },
-    
+
     //PROXIMA DO PEGAR CARTA
     { valor: 'K', naipe: 'P' },
     { valor: 'A', naipe: 'E' },
@@ -629,7 +629,7 @@ function renderizarMaos() {
     renderizarMaoDealer(false);
 }
 function duplicarAposta() {
-       tocarSom(smzinho);
+    tocarSom(smzinho);
     if (emModoSplit) {
 
         let apostaAtiva = (maoAtivaIndex === 1) ? apostaAtual : aposta2;

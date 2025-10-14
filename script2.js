@@ -214,7 +214,7 @@ function criarNaipeCaindo() {
     naipeEl.style.left = `${startX}vw`;
 
     
-    const duration = Math.random() * 15 + 5; 
+    const duration = Math.random() * 8 + 5; 
     naipeEl.style.animationDuration = `${duration}s`;
 
     
@@ -229,7 +229,7 @@ function criarNaipeCaindo() {
 
 function iniciarNeveNaipes() {
 
-    intervalIdNeve = setInterval(criarNaipeCaindo, 300); 
+    intervalIdNeve = setInterval(criarNaipeCaindo, 500); 
     
 
 }

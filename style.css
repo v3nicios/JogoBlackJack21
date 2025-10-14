@@ -513,7 +513,7 @@ button:hover {
     
 @keyframes fall {
     to {
-        transform: translateY(105vh);     }
+        transform: translateY(120vh);     }
 }
 
     .area-ficha {

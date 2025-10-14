@@ -844,3 +844,5 @@ function pararAnimacao() {
 atualizarSaldoNaTela();
 prepararNovaRodada();
 
+
+

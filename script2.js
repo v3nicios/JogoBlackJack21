@@ -5,6 +5,9 @@ const cartasDealerEl = document.getElementById('cartas-dealer');
 const mensagemResultadoEl = document.getElementById('mensagem-bnt');
 const saldobet = document.getElementById('saldojogador');
 const apostaAtualEl = document.getElementById('bet-jogador');
+const FOTO_1_URL = "url('images/Perfil1.jpg')";
+const FOTO_2_URL = "url('images/Perfil2.jpg')";
+
 
 const btnDividir = document.getElementById('btn-dividir');
 const btnPedir = document.getElementById('btn-pedir');
@@ -19,10 +22,12 @@ const btnFicha50 = document.getElementById('f50');
 const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
 const somdaaposta = document.getElementById('somAposta');
+const venifotosom = document.getElementById('mike');
 
 const btnToggleSom = document.getElementById('btn-toggle-som');
 const exemploPontuacaoEl = document.getElementById('exemplo-pontuacao');
 const exemploCartasEl = document.getElementById('exemplo-cartas');
+
 
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("dev")) {
@@ -30,6 +35,10 @@ if (urlParams.has("dev")) {
 } else {
     document.getElementById("qrcode").style.display = "none";
 }
+const btnFotoVeni = document.getElementById('fotodoveni');
+
+
+btnFotoVeni.addEventListener('click', trocarFotoNoBotao);
 
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
@@ -167,4 +176,90 @@ function renderizarExemplo(mao) {
         imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
         exemploCartasEl.appendChild(imgCarta);
     });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+const NAIPES = ['♦️', '♠️', '♣️', '♥️'];
+
+
+const footerEl = document.querySelector('body');
+
+let intervalIdNeve; 
+
+
+function criarNaipeCaindo() {
+    if (!footerEl) return; 
+
+    const naipeEl = document.createElement('span');
+    
+    
+    const naipeAleatorio = NAIPES[Math.floor(Math.random() * NAIPES.length)];
+    naipeEl.textContent = naipeAleatorio;
+
+    
+    naipeEl.classList.add('naipe-caindo');
+    
+    
+    const startX = Math.random() * 100;
+    naipeEl.style.left = `${startX}vw`;
+
+    
+    const duration = Math.random() * 15 + 5; 
+    naipeEl.style.animationDuration = `${duration}s`;
+
+    
+    footerEl.appendChild(naipeEl);
+
+        naipeEl.addEventListener('animationend', () => {
+        naipeEl.remove();
+    });
+}
+
+
+
+function iniciarNeveNaipes() {
+
+    intervalIdNeve = setInterval(criarNaipeCaindo, 300); 
+    
+
+}
+
+function pararNeveNaipes() {
+    clearInterval(intervalIdNeve);
+    
+    document.querySelectorAll('.naipe-caindo').forEach(el => el.remove());
+}
+
+
+
+document.addEventListener('DOMContentLoaded', iniciarNeveNaipes);
+
+
+
+
+
+
+
+
+
+function trocarFotoNoBotao() {
+    tocarSom(venifotosom);
+    const currentBackground = btnFotoVeni.style.backgroundImage;
+    if (currentBackground == FOTO_2_URL) {
+
+        btnFotoVeni.style.backgroundImage = FOTO_1_URL;
+    } else {
+
+        btnFotoVeni.style.backgroundImage = FOTO_2_URL;
+    }
 }

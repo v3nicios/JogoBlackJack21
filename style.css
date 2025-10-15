@@ -1,4 +1,5 @@
 
+
 footer {
     position: relative; 
     overflow: hidden;
@@ -507,6 +508,24 @@ button:hover {
     bottom: 80px;
 }
 
+#paranaipe{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #0a5c28;
+    background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+    position: fixed;
+    right: 10px;
+    bottom: 140px;
+    color: #ffffff;
+    font-size: 10px;
+}
 
 @media (max-width: 768px) {
 
@@ -574,6 +593,27 @@ button:hover {
         right: 7px;
         bottom: 50px;
         padding: 10px;
+    }
+   #paranaipe {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition-duration: .3s;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+        background-color: #0a5c28;
+        background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
+        position: fixed;
+        right: 7px;
+        bottom: 85px;
+        padding: 8px;
+        font-size: 6px;
     }
 
     .area-cartas {
@@ -685,6 +725,31 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+       #paranaipe {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 25px;
+        height: 25px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition-duration: .3s;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+        background-color: #0a5c28;
+        background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
+        position: fixed;
+        right: 0px;
+        bottom: 90px;
+        padding: 5px;
+        font-size: 6px;
+    }
+
+
+
+
     #helpbtn {
         display: flex;
         width: 369px;
@@ -736,7 +801,7 @@ button:hover {
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
         position: fixed;
         right: 0px;
-        bottom: 35px;
+        bottom: 30px;
         padding: 6px;
     }
 

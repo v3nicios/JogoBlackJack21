@@ -23,6 +23,8 @@ const btnFicha100 = document.getElementById('f100');
 const btnretibet = document.getElementById('beti');
 const somdaaposta = document.getElementById('somAposta');
 const venifotosom = document.getElementById('mike');
+const ParaNaipe = document.getElementById('paranaipe');
+document.addEventListener('DOMContentLoaded', iniciarNeveNaipes);
 
 const btnToggleSom = document.getElementById('btn-toggle-som');
 const exemploPontuacaoEl = document.getElementById('exemplo-pontuacao');
@@ -39,7 +41,7 @@ const btnFotoVeni = document.getElementById('fotodoveni');
 
 
 btnFotoVeni.addEventListener('click', trocarFotoNoBotao);
-
+ParaNaipe.addEventListener('click', pararNeveNaipes)
 btnDividir.addEventListener('click', dividirMao);
 btnApostar.addEventListener('click', iniciarJogo);
 btnNovoJogo.addEventListener('click', prepararNovaRodada);
@@ -209,11 +211,11 @@ function criarNaipeCaindo() {
     
     naipeEl.classList.add('naipe-caindo');
     
-    
+    //total da tela que ta pegando
     const startX = Math.random() * 100;
     naipeEl.style.left = `${startX}vw`;
 
-    
+    //cria um random para que os naipes caim em tempos diferentes
     const duration = Math.random() * 8 + 5; 
     naipeEl.style.animationDuration = `${duration}s`;
 
@@ -228,8 +230,8 @@ function criarNaipeCaindo() {
 
 
 function iniciarNeveNaipes() {
-
-    intervalIdNeve = setInterval(criarNaipeCaindo, 500); 
+    //intervalo que cria a cada naipe
+    intervalIdNeve = setInterval(criarNaipeCaindo, 900); 
     
 
 }
@@ -242,7 +244,12 @@ function pararNeveNaipes() {
 
 
 
-document.addEventListener('DOMContentLoaded', iniciarNeveNaipes);
+
+
+
+
+
+
 
 
 

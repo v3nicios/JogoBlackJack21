@@ -1,6 +1,6 @@
 # 🃏 Blackjack Simples
 
-Bem-vindo ao **Blackjack**, um projeto focado na implementação e aprendizado do clássico jogo de cartas! Teste suas habilidades de aposta e estratégia contra a casa.
+Bem-vindo ao **Blackjack**, Teste suas habilidades de aposta e estratégia contra a casa.
 ---
 
 ## Como Jogar

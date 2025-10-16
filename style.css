@@ -1,51 +1,62 @@
 
-
-footer {
-    position: relative; 
-    overflow: hidden;
-   
+.imagem-descendo {
+    position: absolute; 
+    top: 20px;
+    width: 80px; 
+    height: auto; 
+    z-index: 1; 
+    animation: descer-devagar linear infinite;
 }
 
 
+@keyframes descer-devagar {
+    from {
+        transform: translateY(-100px); 
+    }
+    to {
+        transform: translateY(100vh); 
+    }
+}
+
+footer {
+    position: relative;
+    overflow: hidden;
+
+}
 .naipe-caindo {
-    color: white; 
+    color: white;
     font-size: 12px;
-    position: absolute; 
-    top: -5%; 
-    z-index: 1;
+    position: absolute;
+    top: -5%;
+    z-index: -1;
     opacity: 0.8;
-    
-  
     animation: fall linear infinite;
 }
 
-
 @keyframes fall {
     to {
-        transform: translateY(255vh);     }
+        transform: translateY(255vh);
+    }
 }
 
 footer {
-    
     width: 365px;
-   
     padding: 20px 0;
     text-align: center;
 }
 
 
 #fotodoveni {
-   
     width: 100px;
     height: 100px;
-    border-radius: 50%; 
-    border: 2px solid #D3AF37; 
-    background-image: url("images/Perfil1.jpg"); 
-    background-size: cover; 
+    border-radius: 50%;
+    border: 2px solid #D3AF37;
+    background-image: url("images/Perfil1.jpg");
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; 
-    transition: background-image 0.9s ease; 
-    background-color: transparent; 
+    background-repeat: no-repeat;
+    transition: background-image 0.9s ease;
+    background-color: transparent;
 }
 
 
@@ -66,8 +77,8 @@ body {
     background-size: 100vh;
     color: white;
     text-align: center;
-    margin: 0; 
-    padding: 0; 
+    margin: 0;
+    padding: 0;
 }
 
 #area-jogo {
@@ -141,8 +152,8 @@ button {
     transition: transform 0.3s ease;
     transform-style: preserve-3d;
     background-color: transparent;
-    
-    
+
+
 }
 
 .ficha {
@@ -508,7 +519,7 @@ button:hover {
     bottom: 80px;
 }
 
-#paranaipe{
+#paranaipe {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -529,11 +540,12 @@ button:hover {
 
 @media (max-width: 768px) {
 
-    
-@keyframes fall {
-    to {
-        transform: translateY(125vh);     }
-}
+
+    @keyframes fall {
+        to {
+            transform: translateY(125vh);
+        }
+    }
 
     .area-ficha {
         display: flex;
@@ -594,7 +606,8 @@ button:hover {
         bottom: 60px;
         padding: 10px;
     }
-   #paranaipe {
+
+    #paranaipe {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -725,7 +738,7 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-       #paranaipe {
+    #paranaipe {
         display: flex;
         align-items: center;
         justify-content: flex-start;

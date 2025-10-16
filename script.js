@@ -682,6 +682,7 @@ function duplicarAposta() {
 
 
 function iniciarAnimacaoDerrota() {
+    iniciarImagensDescendo();
     tocarSom(perdeu);
     var duration = 10 * 1000;
     var animationEnd = Date.now() + duration;
@@ -839,7 +840,69 @@ function pararAnimacao() {
     }
     confetti.reset();
 
+
+ 
+    const imagensDescendo = document.querySelectorAll('.imagem-descendo');
+    
+
+    imagensDescendo.forEach(imgEl => {
+        
+    
+        imgEl.remove();
+        
+ 
+    });
+
+
+
 }
+
+
+
+
+const IMAGEM_DESCENDO_URL = 'images/gatorindo.png'; 
+
+
+const containerParaImagens = document.body; 
+
+
+const NUM_IMAGENS =10;
+
+
+function criarImagemDescendo(index) {
+    const imgEl = document.createElement('img');
+    imgEl.src = IMAGEM_DESCENDO_URL;
+    imgEl.alt = 'Imagem decorativa descendo';
+    imgEl.classList.add('imagem-descendo');
+
+    const espacoEntreImagens = 100 / (NUM_IMAGENS + 1);
+    const startX = espacoEntreImagens * (index + 1);
+    imgEl.style.left = `${startX}vw`; 
+
+    
+    const duracao = Math.random() * 1 + 10; 
+    imgEl.style.animationDuration = `${duracao}s`;
+    
+    
+    const delay = Math.random() * 5; 
+    imgEl.style.animationDelay = `-${delay}s`; 
+
+    containerParaImagens.appendChild(imgEl);
+
+    
+}
+
+
+function iniciarImagensDescendo() {
+    for (let i = 0; i < NUM_IMAGENS; i++) {
+        criarImagemDescendo(i);
+    }
+}
+
+
+
+
+
 
 atualizarSaldoNaTela();
 prepararNovaRodada();

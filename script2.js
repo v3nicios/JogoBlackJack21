@@ -231,7 +231,7 @@ function criarNaipeCaindo() {
 
 function iniciarNeveNaipes() {
     //intervalo que cria a cada naipe
-    intervalIdNeve = setInterval(criarNaipeCaindo, 900); 
+    intervalIdNeve = setInterval(criarNaipeCaindo, 350); 
     
 
 }
@@ -241,6 +241,11 @@ function pararNeveNaipes() {
     
     document.querySelectorAll('.naipe-caindo').forEach(el => el.remove());
 }
+
+
+
+
+
 
 
 

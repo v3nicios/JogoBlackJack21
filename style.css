@@ -21,6 +21,7 @@
 footer {
     position: relative;
     overflow: hidden;
+   
 
 }
 .naipe-caindo {
@@ -35,14 +36,19 @@ footer {
 
 @keyframes fall {
     to {
-        transform: translateY(255vh);
+        transform: translateY(115vh);
     }
 }
 
 footer {
     width: 365px;
     padding: 20px 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 
@@ -543,7 +549,7 @@ button:hover {
 
     @keyframes fall {
         to {
-            transform: translateY(125vh);
+            transform: translateY(115vh);
         }
     }
 

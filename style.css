@@ -729,7 +729,6 @@ button:hover {
         justify-content: center;
         cursor: pointer;
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-     
         padding: 10px;
     }
 
@@ -877,9 +876,6 @@ button:hover {
         justify-content: center;
         cursor: pointer;
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-        position: fixed;
-        right: 0px;
-        bottom: 0px;
         padding: 10px;
     }
 
@@ -997,25 +993,7 @@ button:hover {
         flex-direction: column
     }
 
-    .faq-button {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        border: none;
-        background-color: #0a5c28;
-        background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-        position: fixed;
-        right: 0px;
-        bottom: 10px;
-        padding: 10px;
-
-    }
-
+    
     .faq-button svg {
         height: 0.8em;
         fill: white;
@@ -1191,7 +1169,7 @@ button:hover {
         justify-content: center;
         cursor: pointer;
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-        position: absolute;
+        
     
         padding: 6px;
     }

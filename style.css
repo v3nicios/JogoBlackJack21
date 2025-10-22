@@ -1,29 +1,38 @@
-
 .imagem-descendo {
-    position: absolute; 
+    position: absolute;
     top: 20px;
-    width: 80px; 
-    height: auto; 
-    z-index: 1; 
+    width: 80px;
+    height: auto;
+    z-index: 1;
     animation: descer-devagar linear infinite;
 }
 
+#bntesc {
+    gap: 20px;
+    position: fixed;
+    bottom: 10px;
+    right: 3px;
+
+    margin: 10px;
+}
 
 @keyframes descer-devagar {
     from {
-        transform: translateY(-100px); 
+        transform: translateY(-100px);
     }
+
     to {
-        transform: translateY(100vh); 
+        transform: translateY(100vh);
     }
 }
 
 footer {
     position: relative;
     overflow: hidden;
-   
+
 
 }
+
 .naipe-caindo {
     color: white;
     font-size: 12px;
@@ -85,6 +94,8 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+
+
 }
 
 #area-jogo {
@@ -349,9 +360,7 @@ button:hover {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
+
 }
 
 .faq-button svg {
@@ -433,7 +442,8 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+
 }
 
 
@@ -452,9 +462,7 @@ button:hover {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
     background-color: #0a5c28;
     background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
+
 }
 
 
@@ -520,9 +528,7 @@ button:hover {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-    position: fixed;
-    right: 10px;
-    bottom: 80px;
+
 }
 
 #paranaipe {
@@ -537,9 +543,8 @@ button:hover {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-    position: fixed;
-    right: 10px;
-    bottom: 90px;
+
+
     color: #ffffff;
     font-size: 10px;
 }
@@ -586,9 +591,6 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 5px;
-        bottom: 10px;
         padding: 10px;
     }
 
@@ -607,10 +609,7 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 7px;
-        bottom: 60px;
-        padding: 10px;
+        padding: 8px;
     }
 
     #paranaipe {
@@ -628,9 +627,8 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 7px;
-        bottom: 85px;
+
+
         padding: 8px;
         font-size: 6px;
     }
@@ -731,9 +729,7 @@ button:hover {
         justify-content: center;
         cursor: pointer;
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-        position: fixed;
-        right: 5px;
-        bottom: 0px;
+     
         padding: 10px;
     }
 
@@ -759,9 +755,8 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 0px;
-        bottom: 90px;
+
+
         padding: 5px;
         font-size: 6px;
     }
@@ -797,9 +792,7 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 0px;
-        bottom: 10px;
+
         padding: 10px;
     }
 
@@ -818,9 +811,8 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 0px;
-        bottom: 40px;
+
+
         padding: 6px;
     }
 
@@ -1135,193 +1127,189 @@ button:hover {
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 0px;
-        bottom: 10px;
+
         padding: 10px;
-
-        .text {
-            position: absolute;
-            right: 0%;
-            width: 0%;
-            opacity: 0;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 600;
-            transition-duration: .3s;
-        }
-
-        .sign {
-            width: 100%;
-            transition-duration: .3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .sign svg {
-            width: 17px;
-        }
-
-        .Btn:hover {
-            width: 125px;
-            border-radius: 40px;
-            transition-duration: .3s;
-        }
-
-        .Btn:hover .sign {
-            width: 30%;
-            transition-duration: .3s;
-            padding-left: 20px;
-        }
-
-        .Btn:hover .text {
-            opacity: 1;
-            width: 70%;
-            transition-duration: .3s;
-            padding-right: 10px;
-        }
-
-        .Btn:active {
-            transform: translate(2px, 2px);
-        }
-
-
-
-        .faq-button {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            border: none;
-            background-color: #0a5c28;
-            background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
-            position: absolute;
-            right: 0px;
-            bottom: 10px;
-            padding: 6px;
-        }
-
-        .faq-button svg {
-            height: 0.8em;
-            fill: white;
-        }
-
-        .area-cartas {
-            min-height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .area-cartas img {
-            width: 70px;
-            height: auto;
-            border: 2px solid #454F5B;
-            border-radius: 5px;
-        }
-
-        h2,
-        h1 {
-            font-size: 1.0rem;
-
-        }
-
-        .area-bet {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1px;
-            margin: 0px 0;
-            border: 2px solid #ffd700;
-            border-radius: 5px;
-            width: 80px;
-            height: 66px;
-            background-image: url(images/areabet.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        .fichinha {
-            width: 36px;
-            height: 39px;
-            border-radius: 52%;
-            background-image: url(images/ficha2.png);
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-            font-size: 12px;
-            font-family: "New Rocker", system-ui;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            background-color: transparent;
-        }
-
-        #mensagem-resultado {
-            font-size: 0.9em;
-            font-weight: bold;
-            min-height: 30px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 10px;
-            margin: 5px;
-            cursor: pointer;
-            border: none;
-            border-radius: 15px;
-            font-family: "New Rocker", system-ui;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        #fichas {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
-            margin: 12px 0;
-        }
-
-        .bet-label {
-            margin-top: 5px;
-            font-size: 0.6rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
     }
 
-    #btn-toggle-som {
+    .text {
+        position: absolute;
+        right: 0%;
+        width: 0%;
+        opacity: 0;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        transition-duration: .3s;
+    }
+
+    .sign {
+        width: 100%;
+        transition-duration: .3s;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
+    }
+
+    .sign svg {
+        width: 17px;
+    }
+
+    .Btn:hover {
+        width: 125px;
+        border-radius: 40px;
+        transition-duration: .3s;
+    }
+
+    .Btn:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+    }
+
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+    }
+
+    .Btn:active {
+        transform: translate(2px, 2px);
+    }
+
+
+
+    .faq-button {
         width: 25px;
         height: 25px;
-        border: none;
         border-radius: 50%;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        transition-duration: .3s;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+        border: none;
         background-color: #0a5c28;
         background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
-        position: fixed;
-        right: 0px;
-        bottom: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+        position: absolute;
+    
         padding: 6px;
     }
 
+    .faq-button svg {
+        height: 0.8em;
+        fill: white;
+    }
+
+    .area-cartas {
+        min-height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .area-cartas img {
+        width: 70px;
+        height: auto;
+        border: 2px solid #454F5B;
+        border-radius: 5px;
+    }
+
+    h2,
+    h1 {
+        font-size: 1.0rem;
+
+    }
+
+    .area-bet {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1px;
+        margin: 0px 0;
+        border: 2px solid #ffd700;
+        border-radius: 5px;
+        width: 80px;
+        height: 66px;
+        background-image: url(images/areabet.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .fichinha {
+        width: 36px;
+        height: 39px;
+        border-radius: 52%;
+        background-image: url(images/ficha2.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        font-size: 12px;
+        font-family: "New Rocker", system-ui;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        background-color: transparent;
+    }
+
+    #mensagem-resultado {
+        font-size: 0.9em;
+        font-weight: bold;
+        min-height: 30px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 10px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 15px;
+        font-family: "New Rocker", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #fichas {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin: 12px 0;
+    }
+
+    .bet-label {
+        margin-top: 5px;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+
+#btn-toggle-som {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: #0a5c28;
+    background-image: linear-gradient(147deg, #0a5c28 0%, #afa1a1 74%);
+
+
+    padding: 6px;
+}
 }

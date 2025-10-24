@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+#black{
+    font-size: 1.5rem;
+    padding-top: 20px;
+}
+
 .imagem-descendo {
     position: absolute;
     top: 20px;

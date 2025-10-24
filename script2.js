@@ -194,7 +194,7 @@ function renderizarExemplo(mao) {
 const NAIPES = ['♦️', '♠️', '♣️', '♥️'];
 
 
-const footerEl = document.querySelector('body');
+const footerEl = document.querySelector('#helpbody');
 
 let intervalIdNeve; 
 

@@ -50,7 +50,10 @@ const estouro = document.getElementById('estouro');
 const smzinho = document.getElementById('smzinho');
 const btnToggleSom = document.getElementById('btn-toggle-som');
 
+
+
 //colocar ?dev na url pra ativar o modo desenvolverdor
+
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("dev")) {
     btwin.style.display = "inline-block";
@@ -75,7 +78,10 @@ btnFicha50.addEventListener('click', function () { adicionarAposta(50) });
 btnFicha100.addEventListener('click', function () { adicionarAposta(100) });
 
 
-
+//El é a abreviação de "Element" (Elemento HTML).
+//Usar o sufixo El ajuda qualquer pessoa que leia o código a entender 
+// imediatamente que pontuacaoDealerEl é um objeto do DOM (um elemento da página)
+//e que para mudar o que o usuário vê, ela deve usar propriedades como
 
 function toggleSom() {
     somAtivo = !somAtivo;
@@ -401,15 +407,19 @@ function renderizarMaoDealer(mostrarTudo) {
     if (!maoDealer || maoDealer.length === 0) return;
 
     if (mostrarTudo) {
+
         pontuacaoDealer = calcularPontuacao(maoDealer);
-        pontuacaoDealerEl.textContent = pontuacaoDealer;
+
+pontuacaoDealerEl.textContent = obterTextoPontuacao(maoDealer);
+
         maoDealer.forEach(carta => {
             const imgCarta = document.createElement('img');
             imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
             cartasDealerEl.appendChild(imgCarta);
         });
     } else {
-        pontuacaoDealerEl.textContent = calcularPontuacao([maoDealer[0]]);
+           pontuacaoDealerEl.textContent = obterTextoPontuacao([maoDealer[0]]);   
+
         const primeiraCarta = document.createElement('img');
         primeiraCarta.src = `images/${maoDealer[0].naipe}${maoDealer[0].valor}.webp`;
         cartasDealerEl.appendChild(primeiraCarta);
@@ -590,7 +600,7 @@ function renderizarMaos() {
     if (emModoSplit) {
         pontuacaoJogador2 = calcularPontuacao(maoJogador2);
     }
-
+    const textoPontuacao1 = obterTextoPontuacao(maoJogador);
     const mao1Container = document.getElementById('mao-1-container');
     const tituloMao1 = document.querySelector('#mao-1-container h2');
     const cartas1El = document.getElementById('cartas-jogador-1');
@@ -601,14 +611,19 @@ function renderizarMaos() {
         cartas1El.appendChild(imgCarta);
     });
 
-    if (emModoSplit) {
-        tituloMao1.innerHTML = `Mão 1: <span id="pontuacao-jogador-1">${pontuacaoJogador}</span>`;
+if (emModoSplit) {
+        
+        tituloMao1.innerHTML = `Mão 1: <span id="pontuacao-jogador-1">${textoPontuacao1}</span>`;
     } else {
-        tituloMao1.innerHTML = `Sua Mão: <span id="pontuacao-jogador-1">${pontuacaoJogador}</span>`;
+       
+        tituloMao1.innerHTML = `Sua Mão: <span id="pontuacao-jogador-1">${textoPontuacao1}</span>`;
     }
 
     const mao2Container = document.getElementById('mao-2-container');
     if (emModoSplit) {
+        
+        const textoPontuacao2 = obterTextoPontuacao(maoJogador2);
+
         mao2Container.hidden = false;
         const cartas2El = document.getElementById('cartas-jogador-2');
         cartas2El.innerHTML = '';
@@ -617,7 +632,8 @@ function renderizarMaos() {
             imgCarta.src = `images/${carta.naipe}${carta.valor}.webp`;
             cartas2El.appendChild(imgCarta);
         });
-        document.getElementById('pontuacao-jogador-2').textContent = pontuacaoJogador2;
+        
+        document.getElementById('pontuacao-jogador-2').textContent = textoPontuacao2;
     }
 
     mao1Container.classList.toggle('mao-ativa', emModoSplit && maoAtivaIndex === 1);
@@ -859,6 +875,7 @@ function pararAnimacao() {
 
 
 
+//HAHAHAHAHAHAHHAHAHAHAHHAHAHAHAHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 const IMAGEM_DESCENDO_URL = 'images/gatorindo.png'; 
 
@@ -866,7 +883,7 @@ const IMAGEM_DESCENDO_URL = 'images/gatorindo.png';
 const containerParaImagens = document.body; 
 
 
-const NUM_IMAGENS =10;
+const NUM_IMAGENS = 10;
 
 
 function criarImagemDescendo(index) {
@@ -899,6 +916,39 @@ function iniciarImagensDescendo() {
     }
 }
 
+
+function obterTextoPontuacao(mao) {
+    let pontuacao = 0;
+    let ases = 0;
+
+    // Calcula a pontuação inicial (tratando todos os Ases como 11)
+    for (let carta of mao) {
+        if (['J', 'Q', 'K'].includes(carta.valor)) {
+            pontuacao += 10;
+        } else if (carta.valor === 'A') {
+            ases += 1;
+            pontuacao += 11;
+        } else {
+            pontuacao += parseInt(carta.valor);
+        }
+    }
+
+    // Ajusta os Ases de 11 para 1 se estourar
+    let asesContandoComo11 = ases;
+    while (pontuacao > 21 && asesContandoComo11 > 0) {
+        pontuacao -= 10; 
+        asesContandoComo11--;
+    }
+
+    
+    if (asesContandoComo11 > 0 && pontuacao < 21) {
+        let pontuacaoBaixa = pontuacao - 10; 
+        return `${pontuacaoBaixa} / ${pontuacao}`;
+    }
+
+
+    return pontuacao; 
+}
 
 
 

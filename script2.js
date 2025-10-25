@@ -200,7 +200,7 @@ let intervalIdNeve;
 
 
 function criarNaipeCaindo() {
-    if (!footerEl) return; 
+
 
     const naipeEl = document.createElement('span');
     

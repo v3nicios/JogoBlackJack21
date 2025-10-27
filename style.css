@@ -375,7 +375,7 @@ button:hover {
     fill: white;
 }
 
-/* .faq-button:hover svg {
+.faq-button:hover svg {
     animation: jello-vertical 0.7s both;
 }
 
@@ -408,7 +408,7 @@ button:hover {
         transform: scale3d(1, 1, 1);
     }
 }
- */
+
 
 
 #helpbody {
@@ -782,30 +782,7 @@ button:hover {
         width: 17px;
     }
 
-    .Btn:hover {
-        width: 125px;
-        border-radius: 40px;
-        transition-duration: .3s;
-    }
-
-    .Btn:hover .sign {
-        width: 30%;
-        transition-duration: .3s;
-        padding-left: 20px;
-    }
-
-    .Btn:hover .text {
-        opacity: 1;
-        width: 70%;
-        transition-duration: .3s;
-        padding-right: 10px;
-    }
-
-    .Btn:active {
-        transform: translate(2px, 2px);
-    }
-
-
+    
 
     .faq-button {
         width: 25px;
@@ -1075,29 +1052,7 @@ button:hover {
         width: 17px;
     }
 
-    .Btn:hover {
-        width: 125px;
-        border-radius: 40px;
-        transition-duration: .3s;
-    }
-
-    .Btn:hover .sign {
-        width: 30%;
-        transition-duration: .3s;
-        padding-left: 20px;
-    }
-
-    .Btn:hover .text {
-        opacity: 1;
-        width: 70%;
-        transition-duration: .3s;
-        padding-right: 10px;
-    }
-
-    .Btn:active {
-        transform: translate(2px, 2px);
-    }
-
+   
 
 
     .faq-button {

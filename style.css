@@ -495,11 +495,7 @@ button:hover {
 @media (max-width: 768px) {
 
 
-    @keyframes fall {
-        to {
-            transform: translateY(105vh);
-        }
-    }
+
 
     .area-ficha {
         display: flex;

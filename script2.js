@@ -212,7 +212,7 @@ function criarNaipeCaindo() {
     naipeEl.classList.add('naipe-caindo');
     
     //total da tela que ta pegando
-    const startX = Math.random() * 100;
+    const startX = Math.random() * 95;
     naipeEl.style.left = `${startX}vw`;
 
     //cria um random para que os naipes caim em tempos diferentes

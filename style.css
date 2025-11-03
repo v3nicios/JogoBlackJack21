@@ -325,7 +325,7 @@ button:hover {
 }
 
 .mao-container {
-    border: 1px solid transparent;
+    border: 5px solid transparent;
     padding: 1px;
     margin-bottom: 15px;
     border-radius: 10px;

@@ -63,6 +63,8 @@ const venceu = document.getElementById('venceu');
 const estouro = document.getElementById('estouro');
 const smzinho = document.getElementById('smzinho');
 const btnToggleSom = document.getElementById('btn-toggle-som');
+const cabofi = document.getElementById('cabofi');
+const empate = document.getElementById('empate');
 
 
 
@@ -132,6 +134,7 @@ function dividirMao() {
     tocarSom(somdaaposta);
     if (betsaldo < apostaAtual) {
         mensagemResultadoEl.textContent = "Saldo insuficiente para dividir!";
+
         return;
     }
 
@@ -266,6 +269,7 @@ function adicionarAposta(valor) {
         atualizarSaldoNaTela();
     } else if (betsaldo < valor) {
         mensagemResultadoEl.textContent = "Saldo insuficiente para esta ficha !";
+        tocarSom(cabofi);
     }
 }
 
@@ -342,6 +346,8 @@ function finalizarJogo() {
     } else {
         betsaldo += apostaAtual;
         mensagemFinal += 'Empate!<br>';
+        tocarSom(empate);
+        
     }
 
 
@@ -366,6 +372,7 @@ function finalizarJogo() {
         } else {
             betsaldo += aposta2;
             mensagemFinal += 'Mão 2: Empate!<br>';
+            tocarSom(empate);
         }
     }
 
@@ -666,6 +673,7 @@ function duplicarAposta() {
 
         if (betsaldo < apostaAtiva) {
             mensagemResultadoEl.textContent = "Saldo insuficiente para duplicar!";
+
             return;
         }
 

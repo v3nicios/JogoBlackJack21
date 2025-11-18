@@ -97,8 +97,8 @@ function pedirCarta() {
 function iniciarJogo() {
     tocarSom(somdaaposta);
     limparExemplo();
-    mensagemResultadoEl.innerHTML = "Use este botão para solicitar mais uma carta para a sua mão. <br>"
-        + "O objetivo é chegar o mais perto possível de 21 sem ultrapassar. <br> Você pode pedir quantas cartas quiser, mas cuidado para não 'estourar'!"
+    mensagemResultadoEl.innerHTML = "Use este botão para após incluir um valor de aposta para iniciar o jogo.  <br>"
+        
 }
 //novo jogo
 function prepararNovaRodada() {

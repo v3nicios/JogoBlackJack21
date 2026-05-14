@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Férias Completa</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #eef2f7; padding: 20px; display: flex; justify-content: center; }
+        .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        h2 { color: #2c3e50; text-align: center; margin-bottom: 20px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin: 15px 0; }
+        .checkbox-group input { width: auto; }
+        button { width: 100%; padding: 15px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        button:hover { background-color: #2980b9; }
+        .result { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; display: none; }
+        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .total { font-size: 1.2rem; color: #27ae60; font-weight: bold; border-top: 2px solid #27ae60; margin-top: 10px; }
+        .deduction { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Calculadora de Férias</h2>
+    
+    <div class="form-group">
+        <label>Salário Bruto (R$):</label>
+        <input type="number" id="salario" placeholder="Ex: 3500.00">
+    </div>
+
+    <div class="form-group">
+        <label>Dias de Férias (Normalmente 30):</label>
+        <input type="number" id="diasFerias" value="30" max="30">
+    </div>
+
+    <div class="form-group">
+        <label>Número de Dependentes:</label>
+        <input type="number" id="dependentes" value="0">
+    </div>
+
+    <div class="checkbox-group">
+        <input type="checkbox" id="abono">
+        <label for="abono">Vender 10 dias (Abono Pecuniário)</label>
+    </div>
+
+    <div class="checkbox-group">
+        <input type="checkbox" id="primeiraParcela13">
+        <label for="primeiraParcela13">Adiantar 1ª parcela do 13º</label>
+    </div>
+
+    <button onclick="calcularFerias()">Calcular Férias Líquidas</button>
+
+    <div id="resultado" class="result">
+        <div class="result-row"><span>Valor das Férias:</span> <span id="res-ferias"></span></div>
+        <div class="result-row"><span>1/3 Constitucional:</span> <span id="res-terco"></span></div>
+        <div id="row-abono" class="result-row" style="display:none;"><span>Abono Pecuniário:</span> <span id="res-abono"></span></div>
+        <div id="row-13" class="result-row" style="display:none;"><span>1ª Parcela 13º:</span> <span id="res-13"></span></div>
+        <div class="result-row deduction"><span>INSS:</span> <span id="res-inss"></span></div>
+        <div class="result-row deduction"><span>IRRF:</span> <span id="res-irrf"></span></div>
+        <div class="result-row total"><span>Total Líquido:</span> <span id="res-total"></span></div>
+    </div>
+</div>
+
+<script>
+    function calcularFerias() {
+        const salario = parseFloat(document.getElementById('salario').value);
+        const dias = parseInt(document.getElementById('diasFerias').value);
+        const dependentes = parseInt(document.getElementById('dependentes').value);
+        const querAbono = document.getElementById('abono').checked;
+        const quer13 = document.getElementById('primeiraParcela13').checked;
+
+        if (!salario || salario <= 0) { alert("Informe o salário!"); return; }
+
+        // 1. Valor base dos dias de férias
+        const valorDiasFerias = (salario / 30) * dias;
+        const tercoConstitucional = valorDiasFerias / 3;
+
+        // 2. Abono Pecuniário (Venda de 10 dias) - Não incide INSS/IRRF
+        let valorAbono = 0;
+        let tercoAbono = 0;
+        if (querAbono) {
+            valorAbono = (salario / 30) * 10;
+            tercoAbono = valorAbono / 3;
+            document.getElementById('row-abono').style.display = 'flex';
+        } else {
+            document.getElementById('row-abono').style.display = 'none';
+        }
+
+        // 3. Adiantamento 13º (50% do salário) - Não incide descontos agora
+        let adiantamento13 = quer13 ? (salario / 2) : 0;
+        document.getElementById('row-13').style.display = quer13 ? 'flex' : 'none';
+
+        // Base de cálculo para impostos (Férias + 1/3)
+        const baseImposto = valorDiasFerias + tercoConstitucional;
+
+        // 4. Cálculo INSS (Tabela Progressiva 2024/2025)
+        let inss = calcularINSS(baseImposto);
+
+        // 5. Cálculo IRRF
+        let irrf = calcularIRRF(baseImposto - inss - (dependentes * 189.59));
+
+        // Total Líquido
+        const totalLiquido = baseImposto - inss - irrf + valorAbono + tercoAbono + adiantamento13;
+
+        // Exibição
+        const fmt = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        document.getElementById('res-ferias').innerText = fmt(valorDiasFerias);
+        document.getElementById('res-terco').innerText = fmt(tercoConstitucional);
+        document.getElementById('res-abono').innerText = fmt(valorAbono + tercoAbono);
+        document.getElementById('res-13').innerText = fmt(adiantamento13);
+        document.getElementById('res-inss').innerText = "- " + fmt(inss);
+        document.getElementById('res-irrf').innerText = "- " + fmt(irrf);
+        document.getElementById('res-total').innerText = fmt(totalLiquido);
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function calcularINSS(base) {
+        let imposto = 0;
+        const faixas = [
+            {limite: 1412.00, aliq: 0.075},
+            {limite: 2666.68, aliq: 0.09},
+            {limite: 4000.03, aliq: 0.12},
+            {limite: 7786.02, aliq: 0.14}
+        ];
+        let baseRestante = base;
+        let tAnterior = 0;
+
+        for (let f of faixas) {
+            if (base > f.limite) {
+                imposto += (f.limite - tAnterior) * f.aliq;
+                tAnterior = f.limite;
+            } else {
+                imposto += (base - tAnterior) * f.aliq;
+                return imposto;
+            }
+        }
+        return imposto; // Teto do INSS aproximado
+    }
+
+    function calcularIRRF(base) {
+        if (base <= 2259.20) return 0;
+        if (base <= 2826.65) return (base * 0.075) - 169.44;
+        if (base <= 3751.05) return (base * 0.15) - 381.44;
+        if (base <= 4664.68) return (base * 0.225) - 662.77;
+        return (base * 0.275) - 896.00;
+    }
+</script>
+
+</body>
+</html>

@@ -13,7 +13,7 @@
         input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
         .checkbox-group { display: flex; align-items: center; gap: 10px; margin: 15px 0; }
         .checkbox-group input { width: auto; }
-        button { width: 100%; padding: 15px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        button {margin-bottom: 10px; width: 100%; padding: 15px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: bold; }
         button:hover { background-color: #2980b9; }
         .result { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; display: none; }
         .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
@@ -22,7 +22,6 @@
     </style>
 </head>
 <body>
-<button onclick="window.location.href='Saque-aniversario.html'">Voltar ao Jogo</button>
 <div class="container">
     <h2>Calculadora de Férias</h2>
     
@@ -52,6 +51,7 @@
     </div>
 
     <button onclick="calcularFerias()">Calcular Férias Líquidas</button>
+        <button id="controle" onclick="window.location.href='Saque-aniversario.html'"  >Calculadora Saque-aniversario</button>
 
     <div id="resultado" class="result">
         <div class="result-row"><span>Valor das Férias:</span> <span id="res-ferias"></span></div>

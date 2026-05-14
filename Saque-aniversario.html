@@ -17,37 +17,38 @@
         .result p { margin: 8px 0; font-size: 0.95rem; }
         .total-highlight { color: #d93025; font-size: 1.3rem; font-weight: bold; }
         hr { border: 0; border-top: 1px solid #eee; margin: 15px 0; }
+        .controle { width: 10px;position: absolute; top: 20px; left: 20px; background-color: #1a73e8; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-<button onclick="window.location.href='Calculadoradeferias.html'">Voltar ao Jogo</button>
-
-<div class="container">
-    <h2>Projeção Saque 2026</h2>
     
-    <div class="input-group">
-        <label>Saldo Atual do FGTS (R$):</label>
-        <input type="number" id="saldoAtual" placeholder="Quanto você tem hoje">
-    </div>
-
-    <div class="input-group">
-        <label>Salário Bruto Mensal (R$):</label>
-        <input type="number" id="salario" placeholder="Para calcular os 8%">
-    </div>
-
-    <div class="input-group">
-        <label>Mês do seu Aniversário:</label>
-        <select id="mesAniversario">
-            <option value="0">Janeiro</option><option value="1">Fevereiro</option>
-            <option value="2">Março</option><option value="3">Abril</option>
-            <option value="4">Maio</option><option value="5">Junho</option>
-            <option value="6">Julho</option><option value="7">Agosto</option>
-            <option value="8">Setembro</option><option value="9">Outubro</option>
-            <option value="10">Novembro</option><option value="11">Dezembro</option>
-        </select>
-    </div>
-
-    <button onclick="calcularProjecao()">Calcular Saque Estimado</button>
+    <div class="container">
+        <h2>Projeção Saque 2026</h2>
+        
+        <div class="input-group">
+            <label>Saldo Atual do FGTS (R$):</label>
+            <input type="number" id="saldoAtual" placeholder="Quanto você tem hoje">
+        </div>
+        
+        <div class="input-group">
+            <label>Salário Bruto Mensal (R$):</label>
+            <input type="number" id="salario" placeholder="Para calcular os 8%">
+        </div>
+        
+        <div class="input-group">
+            <label>Mês do seu Aniversário:</label>
+            <select id="mesAniversario">
+                <option value="0">Janeiro</option><option value="1">Fevereiro</option>
+                <option value="2">Março</option><option value="3">Abril</option>
+                <option value="4">Maio</option><option value="5">Junho</option>
+                <option value="6">Julho</option><option value="7">Agosto</option>
+                <option value="8">Setembro</option><option value="9">Outubro</option>
+                <option value="10">Novembro</option><option value="11">Dezembro</option>
+            </select>
+        </div>
+        
+        <button onclick="calcularProjecao()">Calcular Saque Estimado</button>
+        <button id="controle" onclick="window.location.href='Calculadoradeferias.html'"  >Calculadora de ferias</button>
 
     <div id="resultado" class="result">
         <p>Meses até o aniversário: <strong id="res-meses"></strong></p>

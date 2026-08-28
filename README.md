@@ -41,4 +41,11 @@ Durante a rodada, você terá acesso aos seguintes botões de ação:
 Este projeto foi desenvolvido por **V3nicios**.
 
 ---
+## upgrade 
 
+* Gato farmando aura para quando ganhar 
+* Musica para o gato farmando aura
+* implementação de controle de dinheiro no jogo 
+* loja para compra dinheiro 
+* implementação de state session com local cache
+* implementar um placar com ligação no supabase para os 10 melhores colocados
